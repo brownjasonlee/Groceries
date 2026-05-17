@@ -3,7 +3,7 @@ const zones = {
     title: "Fridge",
     kicker: "Cold inventory",
     summary:
-      "Condiments, sauces, jars, cheese, and leftovers are the crowded areas. Fresh fruit, lunch protein, and baby-safe snacks are better buys.",
+      "Fresh produce and proteins were restocked from the Walmart cart. Use produce first, then work through the planned proteins.",
     tone: "fridge",
     shelves: [
       {
@@ -11,9 +11,12 @@ const zones = {
         items: [
           item("Kirkland milk, partial gallon", "check"),
           item("Eggs, visible carton", "check"),
+          item("Sour cream", "check"),
+          item("Plain Greek yogurt", "check"),
           item("Feta crumbles", "overstock"),
           item("String cheese", "overstock"),
           item("Mozzarella cheese", "overstock"),
+          item("Shredded mozzarella", "overstock"),
           item("Shredded cheddar", "overstock"),
           item("Velveeta slices", "overstock"),
           item("Butter", "check"),
@@ -26,7 +29,18 @@ const zones = {
         items: [
           item("Romaine lettuce", "use-first"),
           item("Red onion", "check"),
+          item("Yellow onions", "check"),
           item("Baby spinach", "use-first"),
+          item("Spring mix", "use-first"),
+          item("Cucumbers", "use-first"),
+          item("Red potatoes", "check"),
+          item("Broccoli", "use-first"),
+          item("Bananas", "use-first"),
+          item("Strawberries", "use-first"),
+          item("Apple", "check"),
+          item("Avocado", "use-first"),
+          item("Yellow bell pepper", "use-first"),
+          item("Roma tomatoes", "use-first"),
           item("Green beans", "verify"),
           item("Lemon half", "use-first"),
           item("Leftover greens", "use-first")
@@ -41,6 +55,15 @@ const zones = {
           item("Foil-wrapped leftovers", "use-first"),
           item("Bagel or roll", "verify")
         ]
+      },
+      {
+        name: "Fresh Proteins",
+        items: [
+          item("Chicken thighs", "use-first"),
+          item("Ground beef", "use-first"),
+          item("Bacon", "check"),
+          item("Deli ham", "check")
+        ]
       }
     ],
     door: [
@@ -52,7 +75,8 @@ const zones = {
           item("Yellow mustard", "overstock"),
           item("Ranch", "overstock"),
           item("Hot sauces", "overstock"),
-          item("Sriracha-style sauce", "overstock")
+          item("Sriracha-style sauce", "overstock"),
+          item("Barbecue sauce", "overstock")
         ]
       },
       {
@@ -72,7 +96,7 @@ const zones = {
     title: "Freezer",
     kicker: "Frozen inventory",
     summary:
-      "There are enough freezer rescue meals and frozen vegetables to cover several pressure nights before restocking.",
+      "Freezer rescue meals plus new kid convenience foods can cover schedule pressure nights before restocking.",
     tone: "freezer",
     shelves: [
       {
@@ -94,6 +118,10 @@ const zones = {
           item("Grilled chicken strips", "check"),
           item("Beef hot dogs", "check"),
           item("Smoked sausage", "check"),
+          item("Chicken tenders", "overstock"),
+          item("Chicken nuggets", "overstock"),
+          item("Corn dogs", "overstock"),
+          item("White Castle sliders", "overstock"),
           item("Ground meat or roast", "verify")
         ]
       },
@@ -124,7 +152,7 @@ const zones = {
     title: "Pantry",
     kicker: "Shelf-stable inventory",
     summary:
-      "The pantry is stocked with carbs, beans, oatmeal, ramen, snacks, and almond butter. Buy fresh items before more shelf-stable food.",
+      "The pantry is heavily stocked after the Walmart cart: pasta, sauces, canned goods, cereal, snacks, rice, and convenience sides should be used before restocking.",
     tone: "pantry",
     groups: [
       {
@@ -132,7 +160,11 @@ const zones = {
         items: [
           item("Angel hair spaghetti", "overstock"),
           item("Lasagna noodles", "overstock"),
-          item("Colored pasta", "check"),
+          item("Long grain rice", "overstock"),
+          item("Spaghetti", "overstock"),
+          item("Penne / rigatoni / rotini", "overstock"),
+          item("Elbows / shells", "overstock"),
+          item("Colored pasta", "overstock"),
           item("Rice noodles", "check"),
           item("Quinoa and brown rice pouches", "overstock"),
           item("Instant oatmeal", "overstock"),
@@ -145,11 +177,17 @@ const zones = {
         items: [
           item("Black beans", "overstock"),
           item("Baked beans", "check"),
+          item("Red beans", "overstock"),
+          item("Pinto beans", "overstock"),
           item("Green beans", "overstock"),
+          item("Mixed vegetables", "overstock"),
           item("Canned spaghetti rings", "check"),
           item("Evaporated milk", "check"),
           item("Blueberry pie filling", "check"),
-          item("Almond butter", "overstock")
+          item("Almond butter", "overstock"),
+          item("Hunt's pasta sauce", "overstock"),
+          item("Prego Alfredo", "overstock"),
+          item("Thick/chunky salsa", "overstock")
         ]
       },
       {
@@ -158,9 +196,30 @@ const zones = {
           item("Buldak ramen", "overstock"),
           item("Instant noodles", "overstock"),
           item("Ancient grains cereal", "check"),
+          item("Froot Loops", "overstock"),
+          item("Apple Jacks", "overstock"),
+          item("Mixed fruit cups", "overstock"),
+          item("Tortilla chips", "check"),
+          item("Blueberry muffins", "use-first"),
+          item("Gerber biscuits", "check"),
+          item("Yogurt bites", "check"),
+          item("Fruit/protein pouches", "check"),
           item("Honey graham crackers", "check"),
           item("Chips / crackers", "overstock"),
           item("Snack box packets", "overstock")
+        ]
+      },
+      {
+        name: "Convenience Sides",
+        items: [
+          item("Velveeta shells and cheese", "overstock"),
+          item("Knorr pasta sides", "overstock"),
+          item("Tuna Helper", "check"),
+          item("Crescent rolls", "check"),
+          item("Cinnamon rolls", "check"),
+          item("Cake or dessert mix", "verify"),
+          item("Hot dog buns", "check"),
+          item("Tortillas", "check")
         ]
       }
     ]
@@ -168,18 +227,18 @@ const zones = {
 };
 
 const tripBias = [
-  "Fresh fruit and soft baby-safe produce",
-  "Bread or tortillas",
-  "Lunch meat or another easy protein",
-  "Yogurt if baby/kids are eating it",
-  "Milk and eggs only after checking counts"
+  "Use strawberries, bananas, avocado, tomatoes, cucumbers, and greens first",
+  "Plan chicken thighs and ground beef before leaning on freezer meals",
+  "Avoid pasta, pasta sauce, canned goods, cereal, and cheese next trip",
+  "Use kid convenience foods as backup meals, not the default",
+  "Send receipt photo when available for prices and exact quantities"
 ];
 
 const gaps = [
-  item("Fresh fruit", "gap"),
-  item("Baby-safe snacks", "gap"),
-  item("Bread / tortillas", "gap"),
-  item("Lunch protein", "gap")
+  item("Receipt photo", "gap"),
+  item("Put-away fridge photo", "gap"),
+  item("Put-away pantry photo", "gap"),
+  item("Milk / eggs count", "gap")
 ];
 
 const photos = [
@@ -192,7 +251,12 @@ const photos = [
   photo("Upright freezer", "../grocery-inventory/photos/2026-05-17-initial-inventory/09-upright-freezer.jpg"),
   photo("Pantry door", "../grocery-inventory/photos/2026-05-17-initial-inventory/02-pantry-door.jpg"),
   photo("Pantry pasta and rice", "../grocery-inventory/photos/2026-05-17-initial-inventory/06-pantry-pasta-rice.jpg"),
-  photo("Pantry snacks", "../grocery-inventory/photos/2026-05-17-initial-inventory/05-pantry-snacks-ramen.jpg")
+  photo("Pantry snacks", "../grocery-inventory/photos/2026-05-17-initial-inventory/05-pantry-snacks-ramen.jpg"),
+  photo("Walmart cart pantry", "../grocery-inventory/cart-photos/2026-05-17-walmart-cart/01-pantry-pasta-cereal-cans.jpg"),
+  photo("Walmart cart produce top", "../grocery-inventory/cart-photos/2026-05-17-walmart-cart/02-produce-top.jpg"),
+  photo("Walmart cart produce", "../grocery-inventory/cart-photos/2026-05-17-walmart-cart/03-produce-snacks.jpg"),
+  photo("Walmart cart proteins", "../grocery-inventory/cart-photos/2026-05-17-walmart-cart/04-proteins-dairy-convenience.jpg"),
+  photo("Walmart cart kid snacks", "../grocery-inventory/cart-photos/2026-05-17-walmart-cart/05-kid-baby-snacks-frozen.jpg")
 ];
 
 const state = {

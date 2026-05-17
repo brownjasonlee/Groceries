@@ -74,15 +74,19 @@ Built for the 2026-05-17 trip. Goal: staples, easy assembly, 2-3 cook nights, ki
 - Frozen pasta meals / ravioli / lasagna
 - Rice pouches
 - Dry pasta
+- Pasta sauce / Alfredo sauce
 - Oatmeal
 - Beans
+- Canned vegetables
 - Popcorn
 - Ramen
 - Shelf-stable snack overflow
+- Cereal
 - Almond butter
 - Frozen vegetables unless a specific favorite is gone
 - Condiments, dressings, hot sauce, ketchup, mustard, salsa, pickles, and jarred peppers
 - Extra cheese unless it is tied to lunches or a planned dinner
+- Frozen/convenience kid food unless current chicken tenders/nuggets/corn dogs/sliders are used down
 
 ## Easy Weeknight Buckets
 

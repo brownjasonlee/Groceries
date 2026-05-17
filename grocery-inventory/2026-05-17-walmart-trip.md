@@ -25,7 +25,11 @@ Save photos here: `grocery-inventory/cart-photos/`
 
 Photos received:
 
-- Pending
+- [01 pantry/pasta/cereal/cans](cart-photos/2026-05-17-walmart-cart/01-pantry-pasta-cereal-cans.jpg)
+- [02 produce top](cart-photos/2026-05-17-walmart-cart/02-produce-top.jpg)
+- [03 produce/snacks](cart-photos/2026-05-17-walmart-cart/03-produce-snacks.jpg)
+- [04 proteins/dairy/convenience](cart-photos/2026-05-17-walmart-cart/04-proteins-dairy-convenience.jpg)
+- [05 kid/baby snacks/frozen](cart-photos/2026-05-17-walmart-cart/05-kid-baby-snacks-frozen.jpg)
 
 ## Receipt Photos
 
@@ -39,7 +43,13 @@ Photos received:
 
 Items bought:
 
-- Pending receipt/cart photos
+- Fresh produce: bananas, apple, strawberries, avocado, yellow bell pepper, onions, roma tomatoes, broccoli, organic baby spinach/spring mix, cucumbers, red potatoes.
+- Proteins: chicken thighs, ground beef, bacon, deli ham, Tyson chicken tenders, chicken nuggets, corn dogs, White Castle sliders.
+- Dairy/refrigerated: sour cream, plain Greek yogurt, shredded mozzarella.
+- Pantry/canned: long grain rice, multiple pasta shapes, spaghetti, Hunt's pasta sauce, Prego Alfredo, thick/chunky salsa or sauce, Sweet Baby Ray's barbecue sauce, canned red beans, pinto beans, green beans, mixed vegetables.
+- Kid/baby/snacks: Gerber biscuits, yogurt bites, fruit/protein pouches, Froot Loops, Apple Jacks, mixed fruit cups, tortilla chips, blueberry streusel muffins.
+- Convenience meals/sides: Velveeta shells and cheese, Knorr pasta sides, Tuna Helper, crescent rolls, cinnamon rolls.
+- Other visible items: hot dog buns, tortillas, orange juice or similar carton, cake mix or dessert mix, verify.
 
 Staples to promote:
 
@@ -47,10 +57,20 @@ Staples to promote:
 
 Possible overbuys:
 
-- Frozen meals, pasta, rice, oatmeal, beans, snacks, condiments, sauces, jars, and cheese.
+- Pasta, pasta sauce, canned vegetables/beans, cereal, frozen/convenience kid food, snack foods, condiments/sauces, and cheese.
+- Fresh produce is now stocked and should be used deliberately this week.
 
 Use-up meals this week:
 
-- Freezer meal night
-- Taco or rice bowl night
-- Pasta or breakfast-for-dinner night
+- Taco/rice bowl night: ground beef, tortillas, tomatoes, onion, avocado, salsa, rice.
+- Chicken thigh night: chicken thighs, broccoli or red potatoes, salad greens.
+- Pasta night: new pasta plus existing/new sauce; add spinach or broccoli.
+- Hot dog/corn dog/chicken tender backup night for kid schedule pressure.
+- Baby-safe snack rotation: bananas, strawberries cut small, yogurt, avocado, soft cooked broccoli/potato, pouches, dissolvable biscuits.
+
+## Post-Trip Read
+
+- The original fresh-food gap was mostly addressed.
+- Pasta/sauce/canned goods became more stocked, so avoid buying those again soon.
+- Convenience kid foods are now available; use them as schedule backups rather than default dinners.
+- Receipt is still pending, so quantities and prices are not reconciled.
