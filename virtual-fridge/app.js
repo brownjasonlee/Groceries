@@ -227,17 +227,17 @@ const zones = {
 };
 
 const tripBias = [
+  "Receipt captured: 65 items, $177.58 subtotal, $183.79 total",
   "Use strawberries, bananas, avocado, tomatoes, cucumbers, and greens first",
   "Plan chicken thighs and ground beef before leaning on freezer meals",
   "Avoid pasta, pasta sauce, canned goods, cereal, and cheese next trip",
-  "Use kid convenience foods as backup meals, not the default",
-  "Send receipt photo when available for prices and exact quantities"
+  "Use kid convenience foods as backup meals, not the default"
 ];
 
 const gaps = [
-  item("Receipt photo", "gap"),
   item("Put-away fridge photo", "gap"),
   item("Put-away pantry photo", "gap"),
+  item("Put-away freezer photo", "gap"),
   item("Milk / eggs count", "gap")
 ];
 
@@ -256,7 +256,8 @@ const photos = [
   photo("Walmart cart produce top", "../grocery-inventory/cart-photos/2026-05-17-walmart-cart/02-produce-top.jpg"),
   photo("Walmart cart produce", "../grocery-inventory/cart-photos/2026-05-17-walmart-cart/03-produce-snacks.jpg"),
   photo("Walmart cart proteins", "../grocery-inventory/cart-photos/2026-05-17-walmart-cart/04-proteins-dairy-convenience.jpg"),
-  photo("Walmart cart kid snacks", "../grocery-inventory/cart-photos/2026-05-17-walmart-cart/05-kid-baby-snacks-frozen.jpg")
+  photo("Walmart cart kid snacks", "../grocery-inventory/cart-photos/2026-05-17-walmart-cart/05-kid-baby-snacks-frozen.jpg"),
+  photo("Walmart receipt", "../grocery-inventory/receipts/2026-05-17-walmart-receipt.jpg")
 ];
 
 const state = {

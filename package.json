@@ -4,6 +4,7 @@
   "private": true,
   "description": "Household grocery inventory and virtual fridge display.",
   "scripts": {
-    "test": "node --check virtual-fridge/app.js && node scripts/verify-virtual-fridge.mjs"
+    "receipts": "node scripts/verify-receipts.mjs && node scripts/render-receipts.mjs",
+    "test": "node --check virtual-fridge/app.js && node scripts/verify-virtual-fridge.mjs && npm run receipts"
   }
 }

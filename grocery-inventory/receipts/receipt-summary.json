@@ -1,0 +1,86 @@
+{
+  "receipts": [
+    {
+      "label": "2026-05-17-walmart.json",
+      "date": "2026-05-17",
+      "itemCount": 65,
+      "subtotal": 177.58,
+      "tax": 6.21,
+      "total": 183.79,
+      "categories": {
+        "baby": {
+          "count": 5,
+          "spend": 10.15
+        },
+        "bakery": {
+          "count": 1,
+          "spend": 3.98
+        },
+        "baking": {
+          "count": 2,
+          "spend": 2.39
+        },
+        "bread": {
+          "count": 1,
+          "spend": 1.48
+        },
+        "breakfast": {
+          "count": 2,
+          "spend": 11.36
+        },
+        "canned": {
+          "count": 4,
+          "spend": 3.5
+        },
+        "cheese": {
+          "count": 4,
+          "spend": 9.09
+        },
+        "condiments": {
+          "count": 2,
+          "spend": 6.21
+        },
+        "convenience": {
+          "count": 4,
+          "spend": 6.2
+        },
+        "dairy": {
+          "count": 2,
+          "spend": 6.22
+        },
+        "freezer": {
+          "count": 4,
+          "spend": 28.24
+        },
+        "fruit": {
+          "count": 1,
+          "spend": 2.37
+        },
+        "pantry": {
+          "count": 11,
+          "spend": 17.78
+        },
+        "produce": {
+          "count": 12,
+          "spend": 22.78
+        },
+        "protein": {
+          "count": 4,
+          "spend": 30.02
+        },
+        "refrigerated": {
+          "count": 2,
+          "spend": 3.98
+        },
+        "snacks": {
+          "count": 3,
+          "spend": 9.86
+        },
+        "tortillas": {
+          "count": 1,
+          "spend": 1.97
+        }
+      }
+    }
+  ]
+}

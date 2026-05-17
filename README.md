@@ -11,6 +11,7 @@ Current setup date: 2026-05-17
 - [Operating system](grocery-inventory/operating-system.md)
 - [Virtual fridge display](virtual-fridge/index.html)
 - [Initial inventory photos](grocery-inventory/photos/2026-05-17-initial-inventory/)
+- [Receipt intake](grocery-inventory/receipts/README.md)
 
 ## Virtual Fridge
 
@@ -28,6 +29,12 @@ Local validation:
 
 ```sh
 npm test
+```
+
+Receipt-only validation/rendering:
+
+```sh
+npm run receipts
 ```
 
 GitHub Actions:

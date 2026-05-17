@@ -37,7 +37,9 @@ Save photos here: `grocery-inventory/receipts/`
 
 Photos received:
 
-- Pending
+- [2026-05-17 Walmart receipt](receipts/2026-05-17-walmart-receipt.jpg)
+- Structured receipt data: [2026-05-17-walmart.json](receipts/data/2026-05-17-walmart.json)
+- Readable receipt list: [2026-05-17-walmart.md](receipts/2026-05-17-walmart.md)
 
 ## After-Trip Reconciliation
 
@@ -50,6 +52,14 @@ Items bought:
 - Kid/baby/snacks: Gerber biscuits, yogurt bites, fruit/protein pouches, Froot Loops, Apple Jacks, mixed fruit cups, tortilla chips, blueberry streusel muffins.
 - Convenience meals/sides: Velveeta shells and cheese, Knorr pasta sides, Tuna Helper, crescent rolls, cinnamon rolls.
 - Other visible items: hot dog buns, tortillas, orange juice or similar carton, cake mix or dessert mix, verify.
+
+Receipt totals:
+
+- Items sold: 65
+- Subtotal: $177.58
+- Tax: $6.21
+- Total: $183.79
+- TC number: `5626 0987 3595 7416 2757 7`
 
 Staples to promote:
 
@@ -73,4 +83,5 @@ Use-up meals this week:
 - The original fresh-food gap was mostly addressed.
 - Pasta/sauce/canned goods became more stocked, so avoid buying those again soon.
 - Convenience kid foods are now available; use them as schedule backups rather than default dinners.
-- Receipt is still pending, so quantities and prices are not reconciled.
+- Receipt is captured and reconciles: 65 item lines sum to the $177.58 subtotal.
+- Receipt barcode/TC is stored, but item retrieval is handled through structured receipt JSON rather than an unauthenticated Walmart barcode lookup.
