@@ -40,13 +40,17 @@ GitHub Actions:
 After this repo is pushed to GitHub:
 
 1. Open `https://github.com/brownjasonlee/Groceries`.
-2. Go to `Settings`.
-3. Go to `Pages`.
-4. Under `Build and deployment`, set `Source` to `GitHub Actions`.
-5. Go to `Actions`.
-6. If GitHub asks to enable workflows for the repository, enable them.
-7. Open the `Deploy GitHub Pages` workflow and confirm the latest run succeeds.
-8. Visit `https://brownjasonlee.github.io/Groceries/`.
+2. Make sure the repository is public, or that the GitHub account/organization plan supports Pages for private repositories.
+3. Go to `Settings`.
+4. Go to `Pages`.
+5. Under `Build and deployment`, set `Source` to `GitHub Actions`.
+6. Go to `Actions`.
+7. If GitHub asks to enable workflows for the repository, enable them.
+8. Open the `Deploy GitHub Pages` workflow and run it, or push a new commit to `main`.
+9. Confirm the latest run succeeds.
+10. Visit `https://brownjasonlee.github.io/Groceries/`.
+
+Current note: GitHub Pages cannot be enabled for a private repository unless the GitHub plan supports private Pages.
 
 ## How to use this going forward
 
