@@ -9,6 +9,7 @@ Current setup date: 2026-05-17
 - [Current inventory](grocery-inventory/current-inventory.md)
 - [Walmart baseline list](grocery-inventory/walmart-baseline-list.md)
 - [Operating system](grocery-inventory/operating-system.md)
+- [Virtual fridge display](virtual-fridge/index.html)
 - [Initial inventory photos](grocery-inventory/photos/2026-05-17-initial-inventory/)
 
 ## How to use this going forward
@@ -18,4 +19,3 @@ Current setup date: 2026-05-17
 3. Save cart photos in `grocery-inventory/cart-photos/`.
 4. Update the inventory notes with what was used up, restocked, or discovered.
 5. Keep the weekly list focused on staples, easy meals, kid lunches/snacks, and baby-safe foods.
-
