@@ -6,13 +6,13 @@ Built for the 2026-05-17 trip. Goal: staples, easy assembly, 2-3 cook nights, ki
 
 ### Fresh Staples
 
-- Milk
-- Eggs
+- Milk, only if the partial gallon will not last the week
+- Eggs, only if the carton is low after checking count
 - Bread
 - Tortillas
-- Butter
-- Shredded cheese
-- Sliced cheese
+- Butter only if the fridge pack is nearly empty
+- Shredded cheese only if there is a specific meal need
+- Sliced cheese only if needed for lunches
 - Yogurt cups or tub yogurt
 - Sour cream or plain Greek yogurt
 - Bananas
@@ -49,11 +49,11 @@ Built for the 2026-05-17 trip. Goal: staples, easy assembly, 2-3 cook nights, ki
 ### Assembly Items
 
 - Taco shells or soft tortillas
-- Salsa
+- Salsa only if current jars are nearly empty
 - Lettuce or slaw
 - Cherry tomatoes for adults/older kids; cut very small for baby
 - Pasta sauce
-- Parmesan
+- Parmesan only if needed for a specific pasta night
 - Frozen garlic bread only if wanted; pantry already has pasta
 - Bagged rice or microwave rice only if the Seeds of Change pouches are not enough
 
@@ -81,6 +81,8 @@ Built for the 2026-05-17 trip. Goal: staples, easy assembly, 2-3 cook nights, ki
 - Shelf-stable snack overflow
 - Almond butter
 - Frozen vegetables unless a specific favorite is gone
+- Condiments, dressings, hot sauce, ketchup, mustard, salsa, pickles, and jarred peppers
+- Extra cheese unless it is tied to lunches or a planned dinner
 
 ## Easy Weeknight Buckets
 
@@ -100,4 +102,3 @@ Built for the 2026-05-17 trip. Goal: staples, easy assembly, 2-3 cook nights, ki
 6. Baby/toddler snacks
 7. Pantry only for list items
 8. Frozen only for true gaps
-
