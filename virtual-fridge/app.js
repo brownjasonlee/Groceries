@@ -542,6 +542,96 @@ function renderSurfaceHeader(label, meta) {
   return header;
 }
 
+function renderKitchenMap() {
+  const map = document.createElement("div");
+  map.className = "kitchen-map";
+  map.setAttribute("aria-label", "Kitchen storage locations");
+
+  kitchenLocations().forEach((location) => {
+    const visibleItems = location.sections.flatMap((section) => section.items.filter(matchesQuery));
+    const card = document.createElement("button");
+    card.className = `location-card location-${location.id}`;
+    card.type = "button";
+    card.dataset.mapZone = location.tab;
+    card.classList.toggle("active", state.tab === location.tab);
+    card.setAttribute("aria-pressed", String(state.tab === location.tab));
+    card.setAttribute("aria-label", `Show ${location.label}`);
+    card.addEventListener("click", () => {
+      state.tab = location.tab;
+      render();
+    });
+
+    const title = document.createElement("span");
+    title.className = "location-title";
+
+    const label = document.createElement("span");
+    label.textContent = location.label;
+
+    const count = document.createElement("strong");
+    count.textContent = `${visibleItems.length}`;
+
+    title.append(label, count);
+
+    const graphic = document.createElement("span");
+    graphic.className = "location-graphic";
+
+    const handle = document.createElement("span");
+    handle.className = "location-handle";
+    handle.setAttribute("aria-hidden", "true");
+
+    const bins = document.createElement("span");
+    bins.className = "location-bins";
+    bins.setAttribute("aria-hidden", "true");
+
+    const items = document.createElement("span");
+    items.className = "location-items";
+    visibleItems.slice(0, 16).forEach((entry, index) => {
+      const marker = document.createElement("span");
+      marker.className = `location-item ${statusClass(entry.status)}`.trim();
+      marker.dataset.kind = itemKind(entry);
+      marker.style.setProperty("--item-index", index);
+      marker.title = `${entry.name} | ${statusLabel(entry.status)}`;
+      items.appendChild(marker);
+    });
+
+    graphic.append(handle, bins, items);
+    card.append(title, graphic);
+    map.appendChild(card);
+  });
+
+  return map;
+}
+
+function kitchenLocations() {
+  const pantryGroups = zones.pantry.groups;
+  return [
+    {
+      id: "freezer",
+      tab: "freezer",
+      label: "Freezer",
+      sections: [...zones.freezer.shelves, ...(zones.freezer.door || [])]
+    },
+    {
+      id: "fridge",
+      tab: "fridge",
+      label: "Fridge",
+      sections: [...zones.fridge.shelves, ...(zones.fridge.door || [])]
+    },
+    {
+      id: "counter",
+      tab: "pantry",
+      label: "Counter",
+      sections: pantryGroups.filter((section) => section.name.toLowerCase().includes("counter"))
+    },
+    {
+      id: "pantry",
+      tab: "pantry",
+      label: "Pantry",
+      sections: pantryGroups.filter((section) => !section.name.toLowerCase().includes("counter"))
+    }
+  ];
+}
+
 function renderPhotos() {
   const grid = document.createElement("div");
   grid.className = "photo-grid";
@@ -627,6 +717,8 @@ function render() {
   zoneTitle.textContent = zone.title;
   zoneKicker.textContent = zone.kicker;
   zoneSummary.textContent = [zone.summary, statusSummary()].filter(Boolean).join(" ");
+
+  inventoryView.appendChild(renderKitchenMap());
 
   if (state.tab === "pantry") {
     inventoryView.appendChild(renderPantry(zone));

@@ -46,6 +46,8 @@ const visualContractChecks = [
   ["visual shelf class", "visual-shelf"],
   ["pantry scene renderer", "pantry-scene"],
   ["counter surface renderer", "counter-surface"],
+  ["kitchen location map renderer", "function renderKitchenMap"],
+  ["kitchen location model", "function kitchenLocations"],
   ["direct zone query support", "URLSearchParams"]
 ];
 
@@ -61,6 +63,9 @@ const requiredStyleTokens = [
   ".item-mark",
   ".pantry-cupboard",
   ".counter-surface",
+  ".kitchen-map",
+  ".location-card",
+  ".location-graphic",
   "[data-kind=\"produce\"]",
   "[data-kind=\"bottle\"]",
   "[data-kind=\"frozen\"]"
