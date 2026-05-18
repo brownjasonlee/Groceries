@@ -9,16 +9,16 @@ const zones = {
       {
         name: "Dairy / Eggs / Cheese",
         items: [
-          item("Kirkland milk, partial gallon", "check"),
+          item("Milk, partial gallon", "check", { brand: "Kirkland", brandType: "store-brand" }),
           item("Eggs, visible carton", "check"),
-          item("Sour cream", "check"),
-          item("Plain Greek yogurt", "check"),
-          item("Feta crumbles", "overstock"),
-          item("String cheese", "overstock"),
-          item("Mozzarella cheese", "overstock"),
-          item("Shredded mozzarella", "overstock"),
-          item("Shredded cheddar", "overstock"),
-          item("Velveeta slices", "overstock"),
+          item("Sour cream", "check", { brand: "Daisy", brandType: "brand" }),
+          item("Plain Greek yogurt", "check", { brand: "Great Value", brandType: "store-brand" }),
+          item("Feta crumbles", "overstock", { brand: "President", brandType: "brand" }),
+          item("String cheese", "overstock", { brand: "Great Value", brandType: "store-brand" }),
+          item("Mozzarella cheese", "overstock", { brand: "Great Value", brandType: "store-brand" }),
+          item("Shredded mozzarella", "overstock", { brand: "Great Value", brandType: "store-brand" }),
+          item("Shredded cheddar", "overstock", { brand: "Great Value", brandType: "store-brand" }),
+          item("Velveeta slices", "overstock", { brand: "Velveeta", brandType: "brand" }),
           item("Butter", "check"),
           item("Hummus", "use-first"),
           item("Yogurt or dip cup", "verify")
@@ -262,7 +262,8 @@ const photos = [
 
 const state = {
   tab: "fridge",
-  query: ""
+  query: "",
+  statusFilter: null
 };
 
 const inventoryView = document.querySelector("#inventoryView");
@@ -275,8 +276,8 @@ const overstockCount = document.querySelector("#overstockCount");
 const gapCount = document.querySelector("#gapCount");
 const tripBiasList = document.querySelector("#tripBias");
 
-function item(name, status = "check") {
-  return { name, status };
+function item(name, status = "check", metadata = {}) {
+  return { name, status, ...metadata };
 }
 
 function photo(name, src) {
@@ -294,6 +295,15 @@ function allItems() {
 }
 
 function matchesQuery(entry) {
+  if (state.statusFilter && entry.status !== state.statusFilter) return false;
+  if (!state.query) return true;
+
+  return [entry.name, entry.brand, entry.brandType]
+    .filter(Boolean)
+    .some((value) => value.toLowerCase().includes(state.query));
+}
+
+function matchesPhoto(entry) {
   if (!state.query) return true;
   return entry.name.toLowerCase().includes(state.query);
 }
@@ -306,10 +316,47 @@ function statusClass(status) {
 }
 
 function renderChip(entry) {
-  const chip = document.createElement("li");
+  const chip = document.createElement("span");
   chip.className = `item-chip ${statusClass(entry.status)}`.trim();
   chip.textContent = entry.name;
-  return chip;
+
+  const details = [statusLabel(entry.status)];
+  if (entry.brand) details.push(`${entry.brandType === "store-brand" ? "Store brand" : "Brand"}: ${entry.brand}`);
+  chip.title = details.join(" | ");
+
+  const wrapper = document.createElement("li");
+  wrapper.appendChild(chip);
+  return wrapper;
+}
+
+function statusLabel(status) {
+  if (status === "use-first") return "Use first";
+  if (status === "overstock") return "Do not buy";
+  if (status === "gap") return "Gap";
+  if (status === "verify") return "Verify";
+  return "On hand";
+}
+
+function statusSummary() {
+  if (state.statusFilter === "use-first") return "Showing use-first items only. Click Use First again to clear.";
+  if (state.statusFilter === "overstock") return "Showing do-not-buy items only. Click Do Not Buy again to clear.";
+  if (state.statusFilter === "gap") return "Showing known gaps only. Click Gaps again to clear.";
+  return "";
+}
+
+function renderSectionCount(count) {
+  const countNode = document.createElement("span");
+  countNode.className = "section-count";
+  countNode.textContent = `${count} ${count === 1 ? "item" : "items"}`;
+  return countNode;
+}
+
+function setFilterButtons() {
+  document.querySelectorAll("[data-status-filter]").forEach((button) => {
+    const active = button.dataset.statusFilter === state.statusFilter;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
 }
 
 function renderShelf(section, className = "shelf") {
@@ -320,11 +367,11 @@ function renderShelf(section, className = "shelf") {
   shelf.className = className;
 
   const heading = document.createElement("h3");
-  heading.textContent = section.name;
+  const title = document.createElement("span");
+  title.className = "section-title";
+  title.textContent = section.name;
 
-  const count = document.createElement("span");
-  count.textContent = `${visibleItems.length}`;
-  heading.appendChild(count);
+  heading.append(title, renderSectionCount(visibleItems.length));
 
   const list = document.createElement("ul");
   list.className = "item-list";
@@ -385,7 +432,7 @@ function renderPhotos() {
   grid.className = "photo-grid";
 
   photos
-    .filter((entry) => matchesQuery(entry))
+    .filter((entry) => matchesPhoto(entry))
     .forEach((entry) => {
       const link = document.createElement("a");
       link.className = "photo-tile";
@@ -407,6 +454,11 @@ function renderPhotos() {
   return grid;
 }
 
+function renderGaps() {
+  const shelf = renderShelf({ name: "Known gaps", items: gaps }, "pantry-bin gap-bin");
+  return shelf || emptyState("No matching gaps.");
+}
+
 function emptyState(text = "No matching items.") {
   const empty = document.createElement("div");
   empty.className = "empty-state";
@@ -425,6 +477,7 @@ function renderMetrics() {
   useFirstCount.textContent = entries.filter((entry) => entry.status === "use-first").length;
   overstockCount.textContent = entries.filter((entry) => entry.status === "overstock").length;
   gapCount.textContent = gaps.length;
+  setFilterButtons();
 
   tripBiasList.replaceChildren();
   tripBias.forEach((text) => {
@@ -439,6 +492,14 @@ function render() {
   renderMetrics();
   inventoryView.replaceChildren();
 
+  if (state.statusFilter === "gap") {
+    zoneTitle.textContent = "Gaps";
+    zoneKicker.textContent = "Missing detail";
+    zoneSummary.textContent = statusSummary();
+    inventoryView.appendChild(renderGaps());
+    return;
+  }
+
   if (state.tab === "photos") {
     zoneTitle.textContent = "Photos";
     zoneKicker.textContent = "Visual reference";
@@ -450,7 +511,7 @@ function render() {
   const zone = zones[state.tab];
   zoneTitle.textContent = zone.title;
   zoneKicker.textContent = zone.kicker;
-  zoneSummary.textContent = zone.summary;
+  zoneSummary.textContent = [zone.summary, statusSummary()].filter(Boolean).join(" ");
 
   if (state.tab === "pantry") {
     inventoryView.appendChild(renderPantry(zone));
@@ -462,6 +523,14 @@ function render() {
 document.querySelectorAll("[data-tab]").forEach((button) => {
   button.addEventListener("click", () => {
     state.tab = button.dataset.tab;
+    render();
+  });
+});
+
+document.querySelectorAll("[data-status-filter]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const nextFilter = button.dataset.statusFilter;
+    state.statusFilter = state.statusFilter === nextFilter ? null : nextFilter;
     render();
   });
 });

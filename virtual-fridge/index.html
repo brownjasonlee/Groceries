@@ -36,17 +36,22 @@
 
       <section class="dashboard">
         <aside class="status-panel" aria-label="Current shopping posture">
-          <div class="metric">
+          <button class="metric status-filter" type="button" data-status-filter="use-first" aria-pressed="false">
             <span class="metric-label">Use First</span>
             <strong id="useFirstCount">0</strong>
-          </div>
-          <div class="metric">
+          </button>
+          <button class="metric status-filter" type="button" data-status-filter="overstock" aria-pressed="false">
             <span class="metric-label">Do Not Buy</span>
             <strong id="overstockCount">0</strong>
-          </div>
-          <div class="metric">
+          </button>
+          <button class="metric status-filter" type="button" data-status-filter="gap" aria-pressed="false">
             <span class="metric-label">Gaps</span>
             <strong id="gapCount">0</strong>
+          </button>
+          <div class="legend" aria-label="Inventory color key">
+            <span><i class="legend-dot use-first"></i>Use first</span>
+            <span><i class="legend-dot overstock"></i>Do not buy</span>
+            <span><i class="legend-dot gap"></i>Gap</span>
           </div>
           <div class="quick-list">
             <h2>Next Trip Bias</h2>
