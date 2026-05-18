@@ -14,6 +14,9 @@ for (const file of readdirSync(receiptDataDir).filter((entry) => entry.endsWith(
     `# ${receipt.transaction.date} ${receipt.store.name} Receipt`,
     "",
     `Photo: [${receipt.transaction.date} receipt](${receipt.transaction.receiptPhoto})`,
+    ...(receipt.transaction.digitalReceipt
+      ? [`Digital receipt: [Walmart PDF](${receipt.transaction.digitalReceipt})`]
+      : []),
     "",
     "## Transaction",
     "",
@@ -39,9 +42,9 @@ for (const file of readdirSync(receiptDataDir).filter((entry) => entry.endsWith(
     "",
     "## Items",
     "",
-    "| Line | Receipt name | Category | UPC | Price |",
-    "| ---: | --- | --- | --- | ---: |",
-    ...receipt.items.map((item) => `| ${item.line} | ${item.receiptName} | ${item.category} | ${item.upc || ""} | $${Number(item.price).toFixed(2)} |`),
+    "| Line | Receipt name | Walmart name | Category | UPC | Price |",
+    "| ---: | --- | --- | --- | --- | ---: |",
+    ...receipt.items.map((item) => `| ${item.line} | ${item.receiptName} | ${item.officialName || ""} | ${item.category} | ${item.upc || ""} | $${Number(item.price).toFixed(2)} |`),
     ""
   ];
 

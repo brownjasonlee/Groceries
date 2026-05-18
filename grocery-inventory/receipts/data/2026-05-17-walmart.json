@@ -17,7 +17,8 @@
     "surveyId": "7WRXHRGN76L",
     "payment": "Debit",
     "receiptPhoto": "../2026-05-17-walmart-receipt.jpg",
-    "barcodeNote": "Receipt barcode/TC identifies the transaction, but itemized retrieval is not available through an unauthenticated local API. Item list was extracted from the visible receipt text and validated against receipt totals."
+    "barcodeNote": "Receipt barcode/TC identifies the transaction. Walmart receipt lookup returned this digital receipt after selecting the Harahan store, debit card type, date, last four, total, and completing reCAPTCHA manually.",
+    "digitalReceipt": "../downloads/2026-05-17-walmart-receipt.pdf"
   },
   "totals": {
     "itemsSold": 65,
@@ -26,70 +27,535 @@
     "total": 183.79
   },
   "items": [
-    { "line": 1, "receiptName": "STRAWBERRIES", "upc": "854891008330", "category": "produce", "price": 2.32 },
-    { "line": 2, "receiptName": "YELLOW BELL", "upc": "000000046800", "category": "produce", "price": 1.46 },
-    { "line": 3, "receiptName": "ONIONS", "upc": "853357002930", "category": "produce", "weightLb": 1.40, "unitPricePerLb": 0.94, "price": 1.32 },
-    { "line": 4, "receiptName": "BANANAS", "upc": "740400390004", "category": "produce", "weightLb": 0.89, "unitPricePerLb": 0.50, "price": 0.45 },
-    { "line": 5, "receiptName": "AVOCADO", "upc": "750032608690", "category": "produce", "price": 0.60 },
-    { "line": 6, "receiptName": "AVOCADO", "upc": "750032608690", "category": "produce", "price": 0.60 },
-    { "line": 7, "receiptName": "TOMATO ROMA", "upc": "000000040870", "category": "produce", "weightLb": 0.44, "unitPricePerLb": 1.27, "price": 0.56 },
-    { "line": 8, "receiptName": "APPLE COSMIC", "upc": "883391035070", "category": "produce", "weightLb": 0.82, "unitPricePerLb": 2.18, "price": 1.79 },
-    { "line": 9, "receiptName": "BROC CROWNS", "upc": "000000030820", "category": "produce", "weightLb": 0.59, "unitPricePerLb": 2.47, "price": 1.46 },
-    { "line": 10, "receiptName": "ORG CUCUMBER", "upc": "045255120220", "category": "produce", "price": 2.98 },
-    { "line": 11, "receiptName": "NTLLA WAFER", "upc": "044000027340", "category": "snacks", "price": 4.58 },
-    { "line": 12, "receiptName": "FL CRL 24.7", "upc": "041192100120", "category": "breakfast", "price": 6.38 },
-    { "line": 13, "receiptName": "AJ CRL 16.6", "upc": "041192100230", "category": "breakfast", "price": 4.98 },
-    { "line": 14, "receiptName": "GV SHELLS", "upc": "078742230520", "category": "pantry", "price": 0.98 },
-    { "line": 15, "receiptName": "GV ROTINI 16", "upc": "078742209990", "category": "pantry", "price": 0.98 },
-    { "line": 16, "receiptName": "GV ELBOW 16", "upc": "078742209970", "category": "pantry", "price": 0.98 },
-    { "line": 17, "receiptName": "GV PENNE 16", "upc": "078742209980", "category": "pantry", "price": 0.98 },
-    { "line": 18, "receiptName": "GV RIGATONI", "upc": "078742230510", "category": "pantry", "price": 0.98 },
-    { "line": 19, "receiptName": "VEL SHELCHS", "upc": "021000658930", "category": "convenience", "price": 2.48 },
-    { "line": 20, "receiptName": "HUNT TRAD", "upc": "027000500060", "category": "pantry", "price": 1.84 },
-    { "line": 21, "receiptName": "HUNT TRAD", "upc": "027000500060", "category": "pantry", "price": 1.84 },
-    { "line": 22, "receiptName": "GV MIX VEG", "upc": "078742072230", "category": "canned", "price": 0.96 },
-    { "line": 23, "receiptName": "GV RED BEANS", "upc": "078742134970", "category": "canned", "price": 0.86 },
-    { "line": 24, "receiptName": "NS GREEN BN", "upc": "078742369430", "category": "canned", "price": 0.76 },
-    { "line": 25, "receiptName": "GV PINTO BNS", "upc": "078742036780", "category": "canned", "price": 0.92 },
-    { "line": 26, "receiptName": "YELLOW CAKE", "upc": "644209307490", "category": "baking", "price": 1.67 },
-    { "line": 27, "receiptName": "GV SPAG 64OZ", "upc": "078742072830", "category": "pantry", "price": 3.97 },
-    { "line": 28, "receiptName": "GV FETTUC", "upc": "078742085840", "category": "pantry", "price": 0.98 },
-    { "line": 29, "receiptName": "JIFFY CORN", "upc": "072486002200", "category": "baking", "price": 0.72 },
-    { "line": 30, "receiptName": "WHT RICE 2LB", "upc": "078742352050", "category": "pantry", "price": 1.77 },
-    { "line": 31, "receiptName": "GV CHRY MXD", "upc": "078742157990", "category": "fruit", "price": 2.37 },
-    { "line": 32, "receiptName": "ORG SALAD", "upc": "681131354780", "category": "produce", "price": 5.46 },
-    { "line": 33, "receiptName": "RED POTATOES", "upc": "033383510030", "category": "produce", "price": 3.78 },
-    { "line": 34, "receiptName": "CHK NUG 32OZ", "upc": "078742122950", "category": "freezer", "price": 5.97 },
-    { "line": 35, "receiptName": "TYS CKN STRP", "upc": "023700018660", "category": "freezer", "price": 12.87 },
-    { "line": 36, "receiptName": "PF GOLDFISH", "upc": "014100085780", "category": "snacks", "price": 2.64 },
-    { "line": 37, "receiptName": "PF GOLDFISH", "upc": "014100085780", "category": "snacks", "price": 2.64 },
-    { "line": 38, "receiptName": "CHKN NDL SCE", "upc": "041000022460", "category": "convenience", "price": 1.00 },
-    { "line": 39, "receiptName": "PARM NDL SCE", "upc": "041000022550", "category": "convenience", "price": 1.00 },
-    { "line": 40, "receiptName": "BBQ SAUCE", "upc": "013409352310", "category": "condiments", "price": 3.24 },
-    { "line": 41, "receiptName": "GV12OZ HONEY", "upc": "078742006670", "category": "condiments", "price": 2.97 },
-    { "line": 42, "receiptName": "THLPR CH PST", "upc": "652729710580", "category": "convenience", "price": 1.72 },
-    { "line": 43, "receiptName": "GV TC HT SLS", "upc": "194346122250", "category": "tortillas", "price": 1.97 },
-    { "line": 44, "receiptName": "GVPARM8", "upc": "078742353220", "category": "cheese", "price": 2.98 },
-    { "line": 45, "receiptName": "PRG ALFR 14", "upc": "051000197590", "category": "pantry", "price": 2.48 },
-    { "line": 46, "receiptName": "LUNCHMEAT", "upc": "070800233670", "category": "protein", "price": 6.48 },
-    { "line": 47, "receiptName": "73 GRND GB", "upc": "078742269530", "category": "protein", "price": 6.94 },
-    { "line": 48, "receiptName": "GV MOZZSH 8", "upc": "078742374250", "category": "cheese", "price": 1.97 },
-    { "line": 49, "receiptName": "GV MOZZSH 8", "upc": "078742374250", "category": "cheese", "price": 1.97 },
-    { "line": 50, "receiptName": "CKN THIGHS", "upc": "225913000000", "category": "protein", "price": 5.62 },
-    { "line": 51, "receiptName": "GB BISCT VAN", "upc": "015000046800", "category": "baby", "price": 2.97 },
-    { "line": 52, "receiptName": "CORNDOGS", "upc": "078742208020", "category": "freezer", "price": 3.43 },
-    { "line": 53, "receiptName": "WC JALBRGR", "upc": "082988011060", "category": "freezer", "price": 5.97 },
-    { "line": 54, "receiptName": "WRIGHT 24OZ", "upc": "079621461000", "category": "protein", "price": 10.98 },
-    { "line": 55, "receiptName": "GV PLNYOG32Z", "upc": "078742016850", "category": "dairy", "price": 3.28 },
-    { "line": 56, "receiptName": "SOUR CREAM", "upc": "073420016140", "category": "dairy", "price": 2.94 },
-    { "line": 57, "receiptName": "CINN ROLL", "upc": "018000005070", "category": "refrigerated", "price": 2.14 },
-    { "line": 58, "receiptName": "CRESCENT ROL", "upc": "078742102430", "category": "refrigerated", "price": 1.84 },
-    { "line": 59, "receiptName": "PC MELTS", "upc": "194346268670", "category": "baby", "price": 1.96 },
-    { "line": 60, "receiptName": "HPY PCH BNBL", "upc": "819573010660", "category": "baby", "price": 1.74 },
-    { "line": 61, "receiptName": "HT PCH DRGFT", "upc": "819573015900", "category": "baby", "price": 1.74 },
-    { "line": 62, "receiptName": "HFT PRBLSPLN", "upc": "819573011730", "category": "baby", "price": 1.74 },
-    { "line": 63, "receiptName": "GV HD BUNS", "upc": "078742097280", "category": "bread", "price": 1.48 },
-    { "line": 64, "receiptName": "4CT BLUEBERY", "upc": "194346066820", "category": "bakery", "price": 3.98 },
-    { "line": 65, "receiptName": "13OZ GV RES", "upc": "078742114530", "category": "cheese", "price": 2.17 }
+    {
+      "line": 1,
+      "receiptName": "STRAWBERRIES",
+      "upc": "854891008330",
+      "category": "produce",
+      "price": 2.32,
+      "officialName": "Fresh Strawberries, 1 lb Container"
+    },
+    {
+      "line": 2,
+      "receiptName": "YELLOW BELL",
+      "upc": "000000046800",
+      "category": "produce",
+      "price": 1.46,
+      "officialName": "Fresh Yellow Bell Pepper, Each"
+    },
+    {
+      "line": 3,
+      "receiptName": "ONIONS",
+      "upc": "853357002930",
+      "category": "produce",
+      "weightLb": 1.4,
+      "unitPricePerLb": 0.94,
+      "price": 1.32,
+      "officialName": "Fresh Whole Yellow Onion, Each"
+    },
+    {
+      "line": 4,
+      "receiptName": "BANANAS",
+      "upc": "740400390004",
+      "category": "produce",
+      "weightLb": 0.89,
+      "unitPricePerLb": 0.5,
+      "price": 0.45,
+      "officialName": "Fresh Banana, Each"
+    },
+    {
+      "line": 5,
+      "receiptName": "AVOCADO",
+      "upc": "750032608690",
+      "category": "produce",
+      "price": 0.6,
+      "officialName": "Fresh Hass Avocados, Each"
+    },
+    {
+      "line": 6,
+      "receiptName": "AVOCADO",
+      "upc": "750032608690",
+      "category": "produce",
+      "price": 0.6,
+      "officialName": "Fresh Hass Avocados, Each"
+    },
+    {
+      "line": 7,
+      "receiptName": "TOMATO ROMA",
+      "upc": "000000040870",
+      "category": "produce",
+      "weightLb": 0.44,
+      "unitPricePerLb": 1.27,
+      "price": 0.56,
+      "officialName": "Fresh Roma Tomato, Each"
+    },
+    {
+      "line": 8,
+      "receiptName": "APPLE COSMIC",
+      "upc": "883391035070",
+      "category": "produce",
+      "weightLb": 0.82,
+      "unitPricePerLb": 2.18,
+      "price": 1.79,
+      "officialName": "Fresh Cosmic Crisp Apple, Each"
+    },
+    {
+      "line": 9,
+      "receiptName": "BROC CROWNS",
+      "upc": "000000030820",
+      "category": "produce",
+      "weightLb": 0.59,
+      "unitPricePerLb": 2.47,
+      "price": 1.46,
+      "officialName": "Fresh Whole Green Broccoli Crowns, 1 Each"
+    },
+    {
+      "line": 10,
+      "receiptName": "ORG CUCUMBER",
+      "upc": "045255120220",
+      "category": "produce",
+      "price": 2.98,
+      "officialName": "Marketside Organic Cucumber Refrigerated, 2 Each"
+    },
+    {
+      "line": 11,
+      "receiptName": "NTLLA WAFER",
+      "upc": "044000027340",
+      "category": "snacks",
+      "price": 4.58,
+      "officialName": "NILLA Wafers Cookies, Vanilla Wafers, 11 oz"
+    },
+    {
+      "line": 12,
+      "receiptName": "FL CRL 24.7",
+      "upc": "041192100120",
+      "category": "breakfast",
+      "price": 6.38,
+      "officialName": "Kellogg's Froot Loops Original Breakfast Cereal, Good Source of Fiber, Mega Size, 24.7 oz"
+    },
+    {
+      "line": 13,
+      "receiptName": "AJ CRL 16.6",
+      "upc": "041192100230",
+      "category": "breakfast",
+      "price": 4.98,
+      "officialName": "Kellogg's Apple Jacks Original Breakfast Cereal Family Size Box, 16.6 oz"
+    },
+    {
+      "line": 14,
+      "receiptName": "GV SHELLS",
+      "upc": "078742230520",
+      "category": "pantry",
+      "price": 0.98,
+      "officialName": "Great Value Shells, 16 oz"
+    },
+    {
+      "line": 15,
+      "receiptName": "GV ROTINI 16",
+      "upc": "078742209990",
+      "category": "pantry",
+      "price": 0.98,
+      "officialName": "Great Value Rotini, 16 oz"
+    },
+    {
+      "line": 16,
+      "receiptName": "GV ELBOW 16",
+      "upc": "078742209970",
+      "category": "pantry",
+      "price": 0.98,
+      "officialName": "Great Value Elbows, 16 oz"
+    },
+    {
+      "line": 17,
+      "receiptName": "GV PENNE 16",
+      "upc": "078742209980",
+      "category": "pantry",
+      "price": 0.98,
+      "officialName": "Great Value Penne Pasta, 16 oz"
+    },
+    {
+      "line": 18,
+      "receiptName": "GV RIGATONI",
+      "upc": "078742230510",
+      "category": "pantry",
+      "price": 0.98,
+      "officialName": "Great Value Rigatoni, 16 oz"
+    },
+    {
+      "line": 19,
+      "receiptName": "VEL SHELCHS",
+      "upc": "021000658930",
+      "category": "convenience",
+      "price": 2.48,
+      "officialName": "Velveeta Shells and Cheese Mac and Cheese, 1 Box, for Easy Dinner or Dinner Sides, Original Flavor, Made with Real Cheese, 12 oz"
+    },
+    {
+      "line": 20,
+      "receiptName": "HUNT TRAD",
+      "upc": "027000500060",
+      "category": "pantry",
+      "price": 1.84,
+      "officialName": "Hunt's Traditional Pasta Sauce, 24 oz. Can"
+    },
+    {
+      "line": 21,
+      "receiptName": "HUNT TRAD",
+      "upc": "027000500060",
+      "category": "pantry",
+      "price": 1.84,
+      "officialName": "Hunt's Traditional Pasta Sauce, 24 oz. Can"
+    },
+    {
+      "line": 22,
+      "receiptName": "GV MIX VEG",
+      "upc": "078742072230",
+      "category": "canned",
+      "price": 0.96,
+      "officialName": "Great Value Mixed Vegetables, 15 oz"
+    },
+    {
+      "line": 23,
+      "receiptName": "GV RED BEANS",
+      "upc": "078742134970",
+      "category": "canned",
+      "price": 0.86,
+      "officialName": "Great Value Red Bean, 15.5 oz"
+    },
+    {
+      "line": 24,
+      "receiptName": "NS GREEN BN",
+      "upc": "078742369430",
+      "category": "canned",
+      "price": 0.76,
+      "officialName": "Great Value No Salt Added Cut Green Beans, 14.5 oz"
+    },
+    {
+      "line": 25,
+      "receiptName": "GV PINTO BNS",
+      "upc": "078742036780",
+      "category": "canned",
+      "price": 0.92,
+      "officialName": "Great Value Pinto Beans, No Salt Added, 15.5 oz"
+    },
+    {
+      "line": 26,
+      "receiptName": "YELLOW CAKE",
+      "upc": "644209307490",
+      "category": "baking",
+      "price": 1.67,
+      "officialName": "Duncan Hines Classic Yellow Cake Mix, 15.25 oz."
+    },
+    {
+      "line": 27,
+      "receiptName": "GV SPAG 64OZ",
+      "upc": "078742072830",
+      "category": "pantry",
+      "price": 3.97,
+      "officialName": "Great Value Spaghetti Pasta, 1 lb, 4 Count"
+    },
+    {
+      "line": 28,
+      "receiptName": "GV FETTUC",
+      "upc": "078742085840",
+      "category": "pantry",
+      "price": 0.98,
+      "officialName": "Great Value Fettuccine, 16 oz"
+    },
+    {
+      "line": 29,
+      "receiptName": "JIFFY CORN",
+      "upc": "072486002200",
+      "category": "baking",
+      "price": 0.72,
+      "officialName": "\"JIFFY\" Corn Muffin Mix, 8.5 oz Box"
+    },
+    {
+      "line": 30,
+      "receiptName": "WHT RICE 2LB",
+      "upc": "078742352050",
+      "category": "pantry",
+      "price": 1.77,
+      "officialName": "Great Value Long Grain Enriched Rice, 32 oz"
+    },
+    {
+      "line": 31,
+      "receiptName": "GV CHRY MXD",
+      "upc": "078742157990",
+      "category": "fruit",
+      "price": 2.37,
+      "officialName": "Great Value Cherry Mixed Fruit in 100% Juice, 4 oz, 4 Count"
+    },
+    {
+      "line": 32,
+      "receiptName": "ORG SALAD",
+      "upc": "681131354780",
+      "category": "produce",
+      "price": 5.46,
+      "officialName": "Marketside Organic Fresh Spinach and Spring Mix, 16 oz"
+    },
+    {
+      "line": 33,
+      "receiptName": "RED POTATOES",
+      "upc": "033383510030",
+      "category": "produce",
+      "price": 3.78,
+      "officialName": "Red Potatoes Whole Fresh, 3lb Bag"
+    },
+    {
+      "line": 34,
+      "receiptName": "CHK NUG 32OZ",
+      "upc": "078742122950",
+      "category": "freezer",
+      "price": 5.97,
+      "officialName": "Great Value Fully Cooked Chicken Nuggets, 32 oz (Frozen)"
+    },
+    {
+      "line": 35,
+      "receiptName": "TYS CKN STRP",
+      "upc": "023700018660",
+      "category": "freezer",
+      "price": 12.87,
+      "officialName": "Tyson Crispy Chicken Breast Strips, Family Pack, 40 oz (Frozen, Fully Cooked)"
+    },
+    {
+      "line": 36,
+      "receiptName": "PF GOLDFISH",
+      "upc": "014100085780",
+      "category": "snacks",
+      "price": 2.64,
+      "officialName": "Goldfish Baked with Whole Grain Cheddar Cheese Crackers, 6.6 oz Bag"
+    },
+    {
+      "line": 37,
+      "receiptName": "PF GOLDFISH",
+      "upc": "014100085780",
+      "category": "snacks",
+      "price": 2.64,
+      "officialName": "Goldfish Baked with Whole Grain Cheddar Cheese Crackers, 6.6 oz Bag"
+    },
+    {
+      "line": 38,
+      "receiptName": "CHKN NDL SCE",
+      "upc": "041000022460",
+      "category": "convenience",
+      "price": 1,
+      "officialName": "Knorr Pasta Sides Chicken Flavor Fettuccine Made with No Artificial Flavors, 4.3 Oz Pouch"
+    },
+    {
+      "line": 39,
+      "receiptName": "PARM NDL SCE",
+      "upc": "041000022550",
+      "category": "convenience",
+      "price": 1,
+      "officialName": "Knorr No Artificial Flavors Parmesan Pasta Sides, 7 Minute Cook Time, 4.3 oz"
+    },
+    {
+      "line": 40,
+      "receiptName": "BBQ SAUCE",
+      "upc": "013409352310",
+      "category": "condiments",
+      "price": 3.24,
+      "officialName": "Sweet Baby Ray's Original Barbecue Sauce 28 oz"
+    },
+    {
+      "line": 41,
+      "receiptName": "GV12OZ HONEY",
+      "upc": "078742006670",
+      "category": "condiments",
+      "price": 2.97,
+      "officialName": "Great Value Honey, 12 oz Plastic Bear"
+    },
+    {
+      "line": 42,
+      "receiptName": "THLPR CH PST",
+      "upc": "652729710580",
+      "category": "convenience",
+      "price": 1.72,
+      "officialName": "Tuna Helper Tuna Cheesy Pasta with Real Cheese, 5.3 Ounces Box"
+    },
+    {
+      "line": 43,
+      "receiptName": "GV TC HT SLS",
+      "upc": "194346122250",
+      "category": "tortillas",
+      "price": 1.97,
+      "officialName": "Great Value Thick and Chunky Hot Salsa, 16 oz"
+    },
+    {
+      "line": 44,
+      "receiptName": "GVPARM8",
+      "upc": "078742353220",
+      "category": "cheese",
+      "price": 2.98,
+      "officialName": "Great Value Grated Parmesan Cheese, 8 oz Shaker"
+    },
+    {
+      "line": 45,
+      "receiptName": "PRG ALFR 14",
+      "upc": "051000197590",
+      "category": "pantry",
+      "price": 2.48,
+      "officialName": "Prego Homestyle Alfredo Pasta Sauce, 14.5 oz Jar"
+    },
+    {
+      "line": 46,
+      "receiptName": "LUNCHMEAT",
+      "upc": "070800233670",
+      "category": "protein",
+      "price": 6.48,
+      "officialName": "Smithfield Prime Fresh Black Forest Ham, Deli Sliced Ham, 16 oz"
+    },
+    {
+      "line": 47,
+      "receiptName": "73 GRND GB",
+      "upc": "078742269530",
+      "category": "protein",
+      "price": 6.94,
+      "officialName": "73% Lean / 27% Fat Ground Beef, 1 lb Tray, Fresh, All Natural"
+    },
+    {
+      "line": 48,
+      "receiptName": "GV MOZZSH 8",
+      "upc": "078742374250",
+      "category": "cheese",
+      "price": 1.97,
+      "officialName": "Great Value Low-Moisture Part-Skim Mozzarella Finely Shredded Cheese, 8 oz Bag"
+    },
+    {
+      "line": 49,
+      "receiptName": "GV MOZZSH 8",
+      "upc": "078742374250",
+      "category": "cheese",
+      "price": 1.97,
+      "officialName": "Great Value Low-Moisture Part-Skim Mozzarella Finely Shredded Cheese, 8 oz Bag"
+    },
+    {
+      "line": 50,
+      "receiptName": "CKN THIGHS",
+      "upc": "225913000000",
+      "category": "protein",
+      "price": 5.62,
+      "officialName": "Sanderson Farms Fresh Chicken Thighs, 22g Protein, 4oz 112g, 1.7- 2.2 lb"
+    },
+    {
+      "line": 51,
+      "receiptName": "GB BISCT VAN",
+      "upc": "015000046800",
+      "category": "baby",
+      "price": 2.97,
+      "officialName": "Gerber Baby Snacks Lil' Biscuits, Toddler Cookies"
+    },
+    {
+      "line": 52,
+      "receiptName": "CORNDOGS",
+      "upc": "078742208020",
+      "category": "freezer",
+      "price": 3.43,
+      "officialName": "Great Value Frozen Appetizers Classic Corn Dogs, 16 oz, 6 Count (Frozen). Contains Wheat, Milk, Eggs and Soy"
+    },
+    {
+      "line": 53,
+      "receiptName": "WC JALBRGR",
+      "upc": "082988011060",
+      "category": "freezer",
+      "price": 5.97,
+      "officialName": "White Castle Jalapeno Cheese Sliders, 6Ct (3-2 Pks)"
+    },
+    {
+      "line": 54,
+      "receiptName": "WRIGHT 24OZ",
+      "upc": "079621461000",
+      "category": "protein",
+      "price": 10.98,
+      "officialName": "Wright Brand Hickory Real Wood Smoked Thick Cut Sliced Refrigerated Bacon, 24 oz"
+    },
+    {
+      "line": 55,
+      "receiptName": "GV PLNYOG32Z",
+      "upc": "078742016850",
+      "category": "dairy",
+      "price": 3.28,
+      "officialName": "Great Value Plain Nonfat Greek Yogurt, 32 oz Tub"
+    },
+    {
+      "line": 56,
+      "receiptName": "SOUR CREAM",
+      "upc": "073420016140",
+      "category": "dairy",
+      "price": 2.94,
+      "officialName": "Daisy Pure and Natural Sour Cream, 14 oz Pouch (Refrigerated)"
+    },
+    {
+      "line": 57,
+      "receiptName": "CINN ROLL",
+      "upc": "018000005070",
+      "category": "refrigerated",
+      "price": 2.14,
+      "officialName": "Pillsbury Cinnamon Rolls with Original Icing, Refrigerated Canned Pastry Dough, 5 Rolls, 7.3 oz"
+    },
+    {
+      "line": 58,
+      "receiptName": "CRESCENT ROL",
+      "upc": "078742102430",
+      "category": "refrigerated",
+      "price": 1.84,
+      "officialName": "Great Value Flaky & Buttery Crescent Rolls, 8 oz, 8 Count"
+    },
+    {
+      "line": 59,
+      "receiptName": "PC MELTS",
+      "upc": "194346268670",
+      "category": "baby",
+      "price": 1.96,
+      "officialName": "Parent's Choice Strawberry Stage 3 Toddler Yogurt Bites Snack, 1 oz Pouch"
+    },
+    {
+      "line": 60,
+      "receiptName": "HPY PCH BNBL",
+      "upc": "819573010660",
+      "category": "baby",
+      "price": 1.74,
+      "officialName": "Happy Tot Organics Super Morning Stage 4, Bananas Blueberries Yogurt & Oats, Organic Tot Food, 4 oz Pouch"
+    },
+    {
+      "line": 61,
+      "receiptName": "HT PCH DRGFT",
+      "upc": "819573015900",
+      "category": "baby",
+      "price": 1.74,
+      "officialName": "Happy Tot, Stage 4 Baby Food, Bananas & Dragonfruit, 4 oz Pouch"
+    },
+    {
+      "line": 62,
+      "receiptName": "HFT PRBLSPLN",
+      "upc": "819573011730",
+      "category": "baby",
+      "price": 1.74,
+      "officialName": "Happy Tot Organics Fiber & Protein Stage 4, Pears Blueberries & Spinach Organic Tot Food, 4 oz Pouch"
+    },
+    {
+      "line": 63,
+      "receiptName": "GV HD BUNS",
+      "upc": "078742097280",
+      "category": "bread",
+      "price": 1.48,
+      "officialName": "Great Value Hot Dog Buns, White, 11 oz, 8 Count"
+    },
+    {
+      "line": 64,
+      "receiptName": "4CT BLUEBERY",
+      "upc": "194346066820",
+      "category": "bakery",
+      "price": 3.98,
+      "officialName": "Marketside Blueberry Muffins, 14 oz, 4 Count"
+    },
+    {
+      "line": 65,
+      "receiptName": "13OZ GV RES",
+      "upc": "078742114530",
+      "category": "snacks",
+      "price": 2.17,
+      "officialName": "Great Value Restaurant Style White Corn Tortilla Chips, 13 oz"
+    }
   ]
 }

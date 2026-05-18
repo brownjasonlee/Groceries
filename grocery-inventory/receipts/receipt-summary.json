@@ -33,8 +33,8 @@
           "spend": 3.5
         },
         "cheese": {
-          "count": 4,
-          "spend": 9.09
+          "count": 3,
+          "spend": 6.92
         },
         "condiments": {
           "count": 2,
@@ -73,8 +73,8 @@
           "spend": 3.98
         },
         "snacks": {
-          "count": 3,
-          "spend": 9.86
+          "count": 4,
+          "spend": 12.03
         },
         "tortillas": {
           "count": 1,
