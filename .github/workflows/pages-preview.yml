@@ -1,0 +1,84 @@
+name: Deploy GitHub Pages Preview
+
+on:
+  push:
+    branches:
+      - "experiment-*"
+      - "preview-*"
+      - "feature-*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build preview site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout preview branch
+        uses: actions/checkout@v4
+        with:
+          path: preview-source
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Run preview tests
+        working-directory: preview-source
+        run: npm test
+
+      - name: Checkout production site
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+
+      - name: Build testing preview path
+        working-directory: preview-source
+        env:
+          SITE_DIR: ../site
+          PREVIEW_SOURCE_DIR: .
+          PREVIEW_BRANCH: ${{ github.ref_name }}
+          PREVIEW_SHA: ${{ github.sha }}
+          PREVIEW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/build-pages-preview.mjs
+
+      - name: Run production-root tests
+        working-directory: site
+        run: npm test
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    name: Deploy preview
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}testing/
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

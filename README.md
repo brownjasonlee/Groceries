@@ -41,6 +41,23 @@ GitHub Actions:
 
 - `.github/workflows/ci.yml` validates the virtual fridge on pushes and pull requests.
 - `.github/workflows/pages.yml` validates and deploys the static site to GitHub Pages on every push to `main`.
+- `.github/workflows/pages-preview.yml` validates experiment branches and deploys them under `/testing/` while keeping the production root built from `main`.
+
+Preview URLs:
+
+- Production: `https://brownjasonlee.github.io/Groceries/`
+- Testing index: `https://brownjasonlee.github.io/Groceries/testing/`
+- Latest preview: `https://brownjasonlee.github.io/Groceries/testing/latest/`
+- Current experiment branch: `https://brownjasonlee.github.io/Groceries/testing/experiment-visual-virtual-fridge/`
+
+Promotion pipeline:
+
+1. Push an experiment branch named `experiment-*`, `preview-*`, or `feature-*`.
+2. GitHub Actions runs tests for that branch.
+3. If tests pass, Pages is rebuilt with production from `main` at the root and the experiment under `/testing/<branch>/`.
+4. Review the testing URL.
+5. Merge the branch into `main`.
+6. The production Pages workflow deploys the promoted version to the root URL.
 
 ## GitHub Pages Setup
 
