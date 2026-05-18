@@ -3,7 +3,7 @@ const zones = {
     title: "Fridge",
     kicker: "Cold inventory",
     summary:
-      "Fresh produce and proteins were restocked from the Walmart cart. Use produce first, then work through the planned proteins.",
+      "Put-away photo confirms the Walmart fridge and freezer baseline. Use produce first, then work through the planned proteins.",
     tone: "fridge",
     shelves: [
       {
@@ -210,6 +210,19 @@ const zones = {
         ]
       },
       {
+        name: "Counter / Bread / Baby",
+        items: [
+          item("Hot dog buns", "check", { brand: "Great Value", brandType: "store-brand" }),
+          item("Sliced bread", "check", { brand: "Sara Lee Artesano", brandType: "brand" }),
+          item("Tortillas", "check", { brand: "Great Value", brandType: "store-brand" }),
+          item("Blueberry muffins", "use-first", { brand: "Marketside", brandType: "store-brand" }),
+          item("Gerber biscuits", "check", { brand: "Gerber", brandType: "brand" }),
+          item("Toddler fruit pouches", "check"),
+          item("Toddler yogurt bites", "check"),
+          item("Goldfish crackers", "check", { brand: "Goldfish", brandType: "brand" })
+        ]
+      },
+      {
         name: "Convenience Sides",
         items: [
           item("Velveeta shells and cheese", "overstock"),
@@ -218,8 +231,7 @@ const zones = {
           item("Crescent rolls", "check"),
           item("Cinnamon rolls", "check"),
           item("Cake or dessert mix", "verify"),
-          item("Hot dog buns", "check"),
-          item("Tortillas", "check")
+          item("Extra bread/tortilla overflow", "check")
         ]
       }
     ]
@@ -228,6 +240,7 @@ const zones = {
 
 const tripBias = [
   "Receipt captured: 65 items, $177.58 subtotal, $183.79 total",
+  "Put-away photos captured for pantry, fridge, freezer, and counter overflow",
   "Use strawberries, bananas, avocado, tomatoes, cucumbers, and greens first",
   "Plan chicken thighs and ground beef before leaning on freezer meals",
   "Avoid pasta, pasta sauce, canned goods, cereal, and cheese next trip",
@@ -235,13 +248,13 @@ const tripBias = [
 ];
 
 const gaps = [
-  item("Put-away fridge photo", "gap"),
-  item("Put-away pantry photo", "gap"),
-  item("Put-away freezer photo", "gap"),
   item("Milk / eggs count", "gap")
 ];
 
 const photos = [
+  photo("Put-away counter bread and baby snacks", "../grocery-inventory/photos/2026-05-18-put-away/01-counter-bread-baby-snacks.jpg"),
+  photo("Put-away pantry after restock", "../grocery-inventory/photos/2026-05-18-put-away/02-pantry-after-restock.jpg"),
+  photo("Put-away fridge and freezer after restock", "../grocery-inventory/photos/2026-05-18-put-away/03-fridge-freezer-after-restock.jpg"),
   photo("Fridge door condiments", "../grocery-inventory/photos/2026-05-17-fridge-inventory/03-fridge-door-condiments-sauces.jpg"),
   photo("Fridge top shelf", "../grocery-inventory/photos/2026-05-17-fridge-inventory/06-fridge-top-shelf.jpg"),
   photo("Fridge cheese and lettuce", "../grocery-inventory/photos/2026-05-17-fridge-inventory/09-fridge-cheese-lettuce.jpg"),

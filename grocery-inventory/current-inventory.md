@@ -2,6 +2,8 @@
 
 Captured from photos on 2026-05-17. This is a first-pass visual inventory, so anything uncertain is marked `verify`.
 
+Updated with put-away photos on 2026-05-18 after the Walmart baseline trip.
+
 ## Photo Index
 
 - [01 chest freezer](photos/2026-05-17-initial-inventory/01-chest-freezer.jpg)
@@ -29,6 +31,16 @@ Captured from photos on 2026-05-17. This is a first-pass visual inventory, so an
 - [23 Walmart cart produce/snacks](cart-photos/2026-05-17-walmart-cart/03-produce-snacks.jpg)
 - [24 Walmart cart proteins/dairy/convenience](cart-photos/2026-05-17-walmart-cart/04-proteins-dairy-convenience.jpg)
 - [25 Walmart cart kid/baby snacks/frozen](cart-photos/2026-05-17-walmart-cart/05-kid-baby-snacks-frozen.jpg)
+- [26 put-away counter bread/baby snacks](photos/2026-05-18-put-away/01-counter-bread-baby-snacks.jpg)
+- [27 pantry after restock](photos/2026-05-18-put-away/02-pantry-after-restock.jpg)
+- [28 fridge/freezer after restock](photos/2026-05-18-put-away/03-fridge-freezer-after-restock.jpg)
+
+## 2026-05-18 Put-Away Snapshot
+
+- Pantry restock is confirmed: pasta, pasta sides, canned beans/vegetables, cereal, rice, tortilla chips, Nilla wafers, pancake mix, oatmeal, snack box, and canned goods are put away.
+- Fridge/freezer restock is confirmed: produce, milk, yogurt, sour cream, lunch meat/cheese containers, bacon, chicken thighs, ground beef, frozen convenience foods, and existing freezer meals are put away.
+- Counter zone currently holds bread/tortilla/baby snack items: hot dog buns, sliced bread, tortillas, blueberry muffins, Gerber biscuits, Goldfish, toddler pouches, yogurt bites, and a small bread roll.
+- Remaining uncertain count: milk and eggs are present, but exact weekly quantity still needs a quick count.
 
 ## Fridge
 
