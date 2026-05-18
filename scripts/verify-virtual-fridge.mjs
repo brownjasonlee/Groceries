@@ -38,6 +38,42 @@ if (!rootHtmlSource.includes("virtual-fridge/")) {
   failures.push("Root index.html must link or redirect to virtual-fridge/.");
 }
 
+const visualContractChecks = [
+  ["visual item classifier", "function itemKind"],
+  ["visual shelf section classifier", "function sectionKind"],
+  ["appliance frame renderer", "appliance-frame"],
+  ["item kind dataset", "chip.dataset.kind"],
+  ["visual shelf class", "visual-shelf"],
+  ["pantry scene renderer", "pantry-scene"],
+  ["counter surface renderer", "counter-surface"],
+  ["direct zone query support", "URLSearchParams"]
+];
+
+for (const [label, token] of visualContractChecks) {
+  if (!appSource.includes(token)) {
+    failures.push(`Missing virtual fridge visual contract: ${label}`);
+  }
+}
+
+const requiredStyleTokens = [
+  ".appliance-cabinet",
+  ".visual-shelf",
+  ".item-mark",
+  ".pantry-cupboard",
+  ".counter-surface",
+  "[data-kind=\"produce\"]",
+  "[data-kind=\"bottle\"]",
+  "[data-kind=\"frozen\"]"
+];
+
+const cssSource = readFileSync(join(root, "virtual-fridge/styles.css"), "utf8");
+
+for (const token of requiredStyleTokens) {
+  if (!cssSource.includes(token)) {
+    failures.push(`Missing virtual fridge visual style token: ${token}`);
+  }
+}
+
 const photoPattern = /photo\("([^"]+)",\s*"([^"]+)"\)/g;
 const photoMatches = [...appSource.matchAll(photoPattern)];
 
