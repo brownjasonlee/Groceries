@@ -273,10 +273,12 @@ const photos = [
   photo("Walmart receipt", "../grocery-inventory/receipts/2026-05-17-walmart-receipt.jpg")
 ];
 
-const initialZone = new URLSearchParams(window.location.search).get("zone");
+const params = new URLSearchParams(window.location.search);
+const initialZone = params.get("zone") || params.get("view");
+const tabs = ["home", "fridge", "freezer", "pantry", "photos"];
 
 const state = {
-  tab: ["fridge", "freezer", "pantry", "photos"].includes(initialZone) ? initialZone : "fridge",
+  tab: tabs.includes(initialZone) ? initialZone : "home",
   query: "",
   statusFilter: null
 };
@@ -299,21 +301,25 @@ function photo(name, src) {
   return { name, src };
 }
 
-function allItems() {
-  const zoneItems = Object.values(zones).flatMap((zone) => {
-    const shelves = zone.shelves || zone.groups || [];
-    const door = zone.door || [];
-    return [...shelves, ...door].flatMap((section) => section.items);
-  });
+function allSections(zoneId) {
+  const zone = zones[zoneId];
+  if (!zone) return [];
+  return [...(zone.shelves || zone.groups || []), ...(zone.door || [])];
+}
 
-  return [...zoneItems, ...gaps];
+function allItems() {
+  return [...Object.keys(zones).flatMap((zoneId) => allSections(zoneId).flatMap((section) => section.items)), ...gaps];
+}
+
+function zoneItems(zoneId) {
+  return allSections(zoneId).flatMap((section) => section.items);
 }
 
 function matchesQuery(entry) {
   if (state.statusFilter && entry.status !== state.statusFilter) return false;
   if (!state.query) return true;
 
-  return [entry.name, entry.brand, entry.brandType]
+  return [entry.name, entry.brand, entry.brandType, statusLabel(entry.status), itemKind(entry)]
     .filter(Boolean)
     .some((value) => value.toLowerCase().includes(state.query));
 }
@@ -327,7 +333,8 @@ function statusClass(status) {
   if (status === "use-first") return "use-first";
   if (status === "overstock") return "overstock";
   if (status === "gap") return "gap";
-  return "";
+  if (status === "verify") return "verify";
+  return "check";
 }
 
 function itemKind(entry) {
@@ -351,39 +358,9 @@ function sectionKind(name) {
   if (/(produce|vegetables|sides)/.test(label)) return "produce";
   if (/(protein|prepared|leftover|ready meals)/.test(label)) return "protein";
   if (/(dairy|egg|cheese|treats)/.test(label)) return "dairy";
+  if (/(counter|bread|baby|snacks)/.test(label)) return "snack";
+  if (/(canned|jarred|sauce)/.test(label)) return "pantry";
   return "mixed";
-}
-
-function renderChip(entry) {
-  const chip = document.createElement("span");
-  const kind = itemKind(entry);
-  chip.className = `item-chip ${statusClass(entry.status)} kind-${kind}`.trim();
-  chip.dataset.kind = kind;
-
-  const mark = document.createElement("span");
-  mark.className = "item-mark";
-  mark.setAttribute("aria-hidden", "true");
-
-  const label = document.createElement("span");
-  label.className = "item-label";
-  label.textContent = entry.name;
-
-  chip.append(mark, label);
-
-  if (entry.brandType) {
-    const meta = document.createElement("span");
-    meta.className = "item-meta";
-    meta.textContent = entry.brandType === "store-brand" ? "store brand" : "brand";
-    chip.appendChild(meta);
-  }
-
-  const details = [statusLabel(entry.status)];
-  if (entry.brand) details.push(`${entry.brandType === "store-brand" ? "Store brand" : "Brand"}: ${entry.brand}`);
-  chip.title = details.join(" | ");
-
-  const wrapper = document.createElement("li");
-  wrapper.appendChild(chip);
-  return wrapper;
 }
 
 function statusLabel(status) {
@@ -395,10 +372,49 @@ function statusLabel(status) {
 }
 
 function statusSummary() {
-  if (state.statusFilter === "use-first") return "Showing use-first items only. Click Use First again to clear.";
-  if (state.statusFilter === "overstock") return "Showing do-not-buy items only. Click Do Not Buy again to clear.";
-  if (state.statusFilter === "gap") return "Showing known gaps only. Click Gaps again to clear.";
+  if (state.statusFilter === "use-first") return "Showing use-first items only. Tap Use First again to clear.";
+  if (state.statusFilter === "overstock") return "Showing do-not-buy items only. Tap Do Not Buy again to clear.";
+  if (state.statusFilter === "gap") return "Showing known gaps only. Tap Gaps again to clear.";
   return "";
+}
+
+function renderChip(entry) {
+  const chip = document.createElement("span");
+  const kind = itemKind(entry);
+  chip.className = `item-chip ${statusClass(entry.status)}`.trim();
+  chip.dataset.kind = kind;
+  chip.dataset.status = entry.status;
+
+  const mark = document.createElement("span");
+  mark.className = "item-mark";
+  mark.setAttribute("aria-hidden", "true");
+
+  const body = document.createElement("span");
+  body.className = "item-body";
+
+  const label = document.createElement("span");
+  label.className = "item-label";
+  label.textContent = entry.name;
+
+  const meta = document.createElement("span");
+  meta.className = "item-meta";
+  meta.textContent = itemMeta(entry);
+
+  body.append(label, meta);
+  chip.append(mark, body);
+  chip.title = [statusLabel(entry.status), entry.brand ? `${entry.brandType === "store-brand" ? "Store brand" : "Brand"}: ${entry.brand}` : ""]
+    .filter(Boolean)
+    .join(" | ");
+
+  const wrapper = document.createElement("li");
+  wrapper.appendChild(chip);
+  return wrapper;
+}
+
+function itemMeta(entry) {
+  const parts = [statusLabel(entry.status)];
+  if (entry.brandType) parts.push(entry.brandType === "store-brand" ? "store brand" : "brand");
+  return parts.join(" / ");
 }
 
 function renderSectionCount(count) {
@@ -416,22 +432,18 @@ function setFilterButtons() {
   });
 }
 
-function renderShelf(section, className = "shelf", options = {}) {
+function renderShelf(section, className = "food-card") {
   const visibleItems = section.items.filter(matchesQuery);
   if (!visibleItems.length) return null;
 
   const shelf = document.createElement("section");
-  shelf.className = className;
-  if (options.visual) {
-    shelf.classList.add("visual-shelf", `section-${sectionKind(section.name)}`, `surface-${options.surface || "cold"}`);
-    shelf.dataset.sectionKind = sectionKind(section.name);
-  }
+  shelf.className = `${className} section-${sectionKind(section.name)}`;
+  shelf.dataset.sectionKind = sectionKind(section.name);
 
   const heading = document.createElement("h3");
   const title = document.createElement("span");
   title.className = "section-title";
   title.textContent = section.name;
-
   heading.append(title, renderSectionCount(visibleItems.length));
 
   const list = document.createElement("ul");
@@ -442,194 +454,255 @@ function renderShelf(section, className = "shelf", options = {}) {
   return shelf;
 }
 
-function renderColdZone(zone) {
-  const frame = document.createElement("div");
-  frame.className = `fridge-frame appliance-frame ${zone.tone}-frame`;
+function renderHome() {
+  const home = document.createElement("div");
+  home.className = "hub-home";
 
-  const cabinet = document.createElement("div");
-  cabinet.className = "cabinet appliance-cabinet";
-  cabinet.style.setProperty("--zone-bg", zone.tone === "freezer" ? "var(--freezer)" : "var(--cold)");
-
-  const cabinetHeader = document.createElement("div");
-  cabinetHeader.className = "appliance-header";
-  const applianceLabel = document.createElement("span");
-  applianceLabel.textContent = zone.tone === "freezer" ? "Upright freezer" : "Main fridge";
-  const zoneCount = document.createElement("span");
-  zoneCount.textContent = `${zone.shelves.length} zones`;
-  cabinetHeader.append(applianceLabel, zoneCount);
-  cabinet.appendChild(cabinetHeader);
-
-  zone.shelves.forEach((section) => {
-    const shelf = renderShelf(section, "shelf", { visual: true });
-    if (shelf) cabinet.appendChild(shelf);
-  });
-
-  const door = document.createElement("aside");
-  door.className = "door-rack appliance-door";
-  (zone.door || []).forEach((section) => {
-    const bin = renderShelf(section, "door-bin", { visual: true });
-    if (bin) door.appendChild(bin);
-  });
-
-  if (!cabinet.children.length && !door.children.length) {
-    frame.appendChild(emptyState());
-    return frame;
-  }
-
-  if (!door.children.length) {
-    door.appendChild(emptyState("No matching door items."));
-  }
-
-  frame.append(cabinet, door);
-  return frame;
+  home.append(renderStatusTiles(), renderZoneOverview(), renderPriorityBoard());
+  return home;
 }
 
-function renderPantry(zone) {
-  const scene = document.createElement("div");
-  scene.className = "pantry-scene";
+function renderStatusTiles() {
+  const total = allItems().length;
+  const useFirst = allItems().filter((entry) => entry.status === "use-first").length;
+  const overstock = allItems().filter((entry) => entry.status === "overstock").length;
 
-  const counterGroups = zone.groups.filter((section) => section.name.toLowerCase().includes("counter"));
-  const shelfGroups = zone.groups.filter((section) => !section.name.toLowerCase().includes("counter"));
+  const grid = document.createElement("section");
+  grid.className = "hub-grid";
+  grid.setAttribute("aria-label", "Quick actions");
 
-  const cupboard = document.createElement("div");
-  cupboard.className = "pantry-cupboard";
-  cupboard.appendChild(renderSurfaceHeader("Pantry shelves", `${shelfGroups.length} zones`));
+  [
+    {
+      label: "Food List",
+      value: total,
+      detail: "All zones",
+      icon: "food-list",
+      action: () => setTab("fridge")
+    },
+    {
+      label: "Use First",
+      value: useFirst,
+      detail: "Eat soon",
+      icon: "use-first",
+      action: () => setStatusFilter("use-first")
+    },
+    {
+      label: "Do Not Buy",
+      value: overstock,
+      detail: "Skip next trip",
+      icon: "do-not-buy",
+      action: () => setStatusFilter("overstock")
+    },
+    {
+      label: "View Inside",
+      value: photos.length,
+      detail: "Photos + receipt",
+      icon: "photos",
+      action: () => setTab("photos")
+    }
+  ].forEach((tile) => grid.appendChild(renderHubTile(tile)));
 
+  return grid;
+}
+
+function renderHubTile(tile) {
+  const button = document.createElement("button");
+  button.className = `hub-tile tile-${tile.icon}`;
+  button.type = "button";
+  button.addEventListener("click", tile.action);
+
+  const icon = document.createElement("span");
+  icon.className = `tile-icon icon-${tile.icon}`;
+  icon.setAttribute("aria-hidden", "true");
+
+  const content = document.createElement("span");
+  content.className = "tile-content";
+
+  const label = document.createElement("span");
+  label.className = "tile-label";
+  label.textContent = tile.label;
+
+  const value = document.createElement("strong");
+  value.textContent = tile.value;
+
+  const detail = document.createElement("span");
+  detail.className = "tile-detail";
+  detail.textContent = tile.detail;
+
+  content.append(label, value, detail);
+  button.append(icon, content);
+  return button;
+}
+
+function renderZoneOverview() {
+  const panel = document.createElement("section");
+  panel.className = "zone-overview";
+
+  const header = renderPanelHeader("Storage zones", "Tap a zone to inspect the food list.");
   const grid = document.createElement("div");
-  grid.className = "pantry-grid";
+  grid.className = "zone-card-grid";
 
-  shelfGroups.forEach((section) => {
-    const bin = renderShelf(section, "pantry-bin pantry-shelf", { visual: true, surface: "pantry" });
-    if (bin) grid.appendChild(bin);
+  Object.entries(zones).forEach(([zoneId, zone]) => {
+    const entries = zoneItems(zoneId);
+    const visibleEntries = entries.filter(matchesQuery);
+    const button = document.createElement("button");
+    button.className = `zone-card zone-${zoneId}`;
+    button.type = "button";
+    button.addEventListener("click", () => setTab(zoneId));
+
+    const icon = document.createElement("span");
+    icon.className = `zone-icon zone-icon-${zoneId}`;
+    icon.setAttribute("aria-hidden", "true");
+
+    const label = document.createElement("span");
+    label.className = "zone-card-label";
+    label.textContent = zone.title;
+
+    const count = document.createElement("strong");
+    count.textContent = `${visibleEntries.length}`;
+
+    const detail = document.createElement("span");
+    detail.className = "zone-card-detail";
+    detail.textContent = zone.summary;
+
+    const chips = document.createElement("span");
+    chips.className = "zone-status-chips";
+    chips.append(
+      renderMiniStatus("Use first", entries.filter((entry) => entry.status === "use-first").length, "use-first"),
+      renderMiniStatus("Do not buy", entries.filter((entry) => entry.status === "overstock").length, "overstock")
+    );
+
+    button.append(icon, label, count, detail, chips);
+    grid.appendChild(button);
   });
 
-  if (grid.children.length) {
-    cupboard.appendChild(grid);
-  }
-
-  const counter = document.createElement("div");
-  counter.className = "counter-surface";
-  counter.appendChild(renderSurfaceHeader("Counter", "bread + baby snacks"));
-
-  counterGroups.forEach((section) => {
-    const bin = renderShelf(section, "pantry-bin counter-bin", { visual: true, surface: "counter" });
-    if (bin) counter.appendChild(bin);
-  });
-
-  if (counter.children.length > 1) {
-    scene.appendChild(counter);
-  }
-
-  if (cupboard.children.length > 1) {
-    scene.appendChild(cupboard);
-  }
-
-  if (!scene.children.length) return emptyState();
-  return scene;
+  panel.append(header, grid);
+  return panel;
 }
 
-function renderSurfaceHeader(label, meta) {
+function renderMiniStatus(label, count, status) {
+  const chip = document.createElement("span");
+  chip.className = `mini-status ${status}`;
+  chip.textContent = `${count} ${label}`;
+  return chip;
+}
+
+function renderPriorityBoard() {
+  const board = document.createElement("section");
+  board.className = "priority-board";
+
+  const useFirst = allItems()
+    .filter((entry) => entry.status === "use-first")
+    .filter(matchesQuery)
+    .slice(0, 10);
+  const doNotBuy = allItems()
+    .filter((entry) => entry.status === "overstock")
+    .filter(matchesQuery)
+    .slice(0, 10);
+
+  board.append(
+    renderListPanel("Use first", "Put these in front of the week.", useFirst),
+    renderListPanel("Do not buy", "Already stocked enough.", doNotBuy)
+  );
+
+  return board;
+}
+
+function renderListPanel(title, subtitle, entries) {
+  const panel = document.createElement("section");
+  panel.className = "panel-card list-panel";
+  panel.appendChild(renderPanelHeader(title, subtitle));
+
+  const list = document.createElement("ul");
+  list.className = "item-list compact";
+  entries.forEach((entry) => list.appendChild(renderChip(entry)));
+
+  panel.appendChild(entries.length ? list : emptyState("Nothing matching right now."));
+  return panel;
+}
+
+function renderPanelHeader(title, subtitle) {
   const header = document.createElement("div");
-  header.className = "surface-header";
+  header.className = "panel-header";
 
-  const labelNode = document.createElement("span");
-  labelNode.textContent = label;
+  const titleNode = document.createElement("h3");
+  titleNode.textContent = title;
 
-  const metaNode = document.createElement("span");
-  metaNode.textContent = meta;
+  const subtitleNode = document.createElement("p");
+  subtitleNode.textContent = subtitle;
 
-  header.append(labelNode, metaNode);
+  header.append(titleNode, subtitleNode);
   return header;
 }
 
-function renderKitchenMap() {
-  const map = document.createElement("div");
-  map.className = "kitchen-map";
-  map.setAttribute("aria-label", "Kitchen storage locations");
+function renderZone(zoneId) {
+  const zone = zones[zoneId];
+  const view = document.createElement("div");
+  view.className = `food-list-view view-${zoneId}`;
 
-  kitchenLocations().forEach((location) => {
-    const visibleItems = location.sections.flatMap((section) => section.items.filter(matchesQuery));
-    const card = document.createElement("button");
-    card.className = `location-card location-${location.id}`;
-    card.type = "button";
-    card.dataset.mapZone = location.tab;
-    card.classList.toggle("active", state.tab === location.tab);
-    card.setAttribute("aria-pressed", String(state.tab === location.tab));
-    card.setAttribute("aria-label", `Show ${location.label}`);
-    card.addEventListener("click", () => {
-      state.tab = location.tab;
-      render();
-    });
+  const actionBar = document.createElement("section");
+  actionBar.className = "view-actions panel-card";
+  actionBar.append(
+    renderViewAction("Add / scan", "Receipt lookup and barcode capture will feed this list."),
+    renderViewAction("Meal ideas", "Prefer use-first produce and fresh proteins."),
+    renderViewAction("Shopping check", "Avoid the do-not-buy groups before trips.")
+  );
 
-    const title = document.createElement("span");
-    title.className = "location-title";
-
-    const label = document.createElement("span");
-    label.textContent = location.label;
-
-    const count = document.createElement("strong");
-    count.textContent = `${visibleItems.length}`;
-
-    title.append(label, count);
-
-    const graphic = document.createElement("span");
-    graphic.className = "location-graphic";
-
-    const handle = document.createElement("span");
-    handle.className = "location-handle";
-    handle.setAttribute("aria-hidden", "true");
-
-    const bins = document.createElement("span");
-    bins.className = "location-bins";
-    bins.setAttribute("aria-hidden", "true");
-
-    const items = document.createElement("span");
-    items.className = "location-items";
-    visibleItems.slice(0, 16).forEach((entry, index) => {
-      const marker = document.createElement("span");
-      marker.className = `location-item ${statusClass(entry.status)}`.trim();
-      marker.dataset.kind = itemKind(entry);
-      marker.style.setProperty("--item-index", index);
-      marker.title = `${entry.name} | ${statusLabel(entry.status)}`;
-      items.appendChild(marker);
-    });
-
-    graphic.append(handle, bins, items);
-    card.append(title, graphic);
-    map.appendChild(card);
+  const grid = document.createElement("div");
+  grid.className = "food-section-grid";
+  allSections(zoneId).forEach((section) => {
+    const card = renderShelf(section);
+    if (card) grid.appendChild(card);
   });
 
-  return map;
+  view.append(actionBar, renderPhotoStrip(zoneId), grid.children.length ? grid : emptyState());
+  return view;
 }
 
-function kitchenLocations() {
-  const pantryGroups = zones.pantry.groups;
-  return [
-    {
-      id: "freezer",
-      tab: "freezer",
-      label: "Freezer",
-      sections: [...zones.freezer.shelves, ...(zones.freezer.door || [])]
-    },
-    {
-      id: "fridge",
-      tab: "fridge",
-      label: "Fridge",
-      sections: [...zones.fridge.shelves, ...(zones.fridge.door || [])]
-    },
-    {
-      id: "counter",
-      tab: "pantry",
-      label: "Counter",
-      sections: pantryGroups.filter((section) => section.name.toLowerCase().includes("counter"))
-    },
-    {
-      id: "pantry",
-      tab: "pantry",
-      label: "Pantry",
-      sections: pantryGroups.filter((section) => !section.name.toLowerCase().includes("counter"))
-    }
-  ];
+function renderViewAction(label, detail) {
+  const action = document.createElement("div");
+  action.className = "view-action";
+
+  const title = document.createElement("strong");
+  title.textContent = label;
+
+  const text = document.createElement("span");
+  text.textContent = detail;
+
+  action.append(title, text);
+  return action;
+}
+
+function renderPhotoStrip(zoneId) {
+  const related = photos.filter((entry) => {
+    const name = entry.name.toLowerCase();
+    if (zoneId === "fridge") return name.includes("fridge") || name.includes("put-away");
+    if (zoneId === "freezer") return name.includes("freezer") || name.includes("put-away");
+    return name.includes("pantry") || name.includes("counter") || name.includes("walmart cart");
+  }).slice(0, 5);
+
+  const strip = document.createElement("section");
+  strip.className = "photo-strip";
+  strip.setAttribute("aria-label", `${zones[zoneId].title} reference photos`);
+
+  related.forEach((entry) => {
+    const link = document.createElement("a");
+    link.className = "photo-chip";
+    link.href = entry.src;
+
+    const image = document.createElement("img");
+    image.src = entry.src;
+    image.alt = entry.name;
+    image.loading = "lazy";
+
+    const label = document.createElement("span");
+    label.textContent = entry.name;
+
+    link.append(image, label);
+    strip.appendChild(link);
+  });
+
+  return related.length ? strip : emptyState("No matching photos.");
 }
 
 function renderPhotos() {
@@ -660,7 +733,7 @@ function renderPhotos() {
 }
 
 function renderGaps() {
-  const shelf = renderShelf({ name: "Known gaps", items: gaps }, "pantry-bin gap-bin");
+  const shelf = renderShelf({ name: "Known gaps", items: gaps }, "food-card gap-bin");
   return shelf || emptyState("No matching gaps.");
 }
 
@@ -692,6 +765,17 @@ function renderMetrics() {
   });
 }
 
+function setTab(tab) {
+  state.tab = tab;
+  if (tab !== "home") state.statusFilter = state.statusFilter === "gap" ? null : state.statusFilter;
+  render();
+}
+
+function setStatusFilter(status) {
+  state.statusFilter = state.statusFilter === status ? null : status;
+  render();
+}
+
 function render() {
   setActiveButtons();
   renderMetrics();
@@ -705,9 +789,17 @@ function render() {
     return;
   }
 
+  if (state.tab === "home") {
+    zoneTitle.textContent = "Home";
+    zoneKicker.textContent = "Smart fridge panel";
+    zoneSummary.textContent = ["Fast scan of what to use, what not to buy, and where to inspect next.", statusSummary()].filter(Boolean).join(" ");
+    inventoryView.appendChild(renderHome());
+    return;
+  }
+
   if (state.tab === "photos") {
     zoneTitle.textContent = "Photos";
-    zoneKicker.textContent = "Visual reference";
+    zoneKicker.textContent = "View inside";
     zoneSummary.textContent = "Open a tile to inspect the original inventory photo.";
     inventoryView.appendChild(renderPhotos());
     return;
@@ -717,28 +809,18 @@ function render() {
   zoneTitle.textContent = zone.title;
   zoneKicker.textContent = zone.kicker;
   zoneSummary.textContent = [zone.summary, statusSummary()].filter(Boolean).join(" ");
-
-  inventoryView.appendChild(renderKitchenMap());
-
-  if (state.tab === "pantry") {
-    inventoryView.appendChild(renderPantry(zone));
-  } else {
-    inventoryView.appendChild(renderColdZone(zone));
-  }
+  inventoryView.appendChild(renderZone(state.tab));
 }
 
 document.querySelectorAll("[data-tab]").forEach((button) => {
   button.addEventListener("click", () => {
-    state.tab = button.dataset.tab;
-    render();
+    setTab(button.dataset.tab);
   });
 });
 
 document.querySelectorAll("[data-status-filter]").forEach((button) => {
   button.addEventListener("click", () => {
-    const nextFilter = button.dataset.statusFilter;
-    state.statusFilter = state.statusFilter === nextFilter ? null : nextFilter;
-    render();
+    setStatusFilter(button.dataset.statusFilter);
   });
 });
 

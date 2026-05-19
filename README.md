@@ -10,6 +10,7 @@ Current setup date: 2026-05-17
 - [Walmart baseline list](grocery-inventory/walmart-baseline-list.md)
 - [Operating system](grocery-inventory/operating-system.md)
 - [Virtual fridge display](virtual-fridge/index.html)
+- [Interface style reference](docs/interface-style-reference.md)
 - [Initial inventory photos](grocery-inventory/photos/2026-05-17-initial-inventory/)
 - [Receipt intake](grocery-inventory/receipts/README.md)
 

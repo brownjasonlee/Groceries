@@ -11,13 +11,12 @@
       <header class="topbar">
         <div>
           <p class="eyebrow">Household grocery baseline</p>
-          <h1>Virtual Fridge</h1>
+          <h1>Kitchen Hub</h1>
+          <p class="topbar-subtitle">Glanceable food list, shopping posture, and photo reference for the week.</p>
         </div>
-        <div class="top-actions" aria-label="Display controls">
-          <button class="icon-button" type="button" data-tab="fridge" aria-label="Show fridge">F</button>
-          <button class="icon-button" type="button" data-tab="freezer" aria-label="Show freezer">Z</button>
-          <button class="icon-button" type="button" data-tab="pantry" aria-label="Show pantry">P</button>
-          <button class="icon-button" type="button" data-tab="photos" aria-label="Show photos">I</button>
+        <div class="sync-card" aria-label="Inventory sync status">
+          <span>Last grocery pass</span>
+          <strong>May 17</strong>
         </div>
       </header>
 
@@ -26,8 +25,9 @@
           <span>Search</span>
           <input id="searchInput" type="search" placeholder="milk, pasta, baby..." autocomplete="off">
         </label>
-        <div class="segmented" role="tablist" aria-label="Inventory zones">
-          <button class="segment active" type="button" data-tab="fridge">Fridge</button>
+        <div class="segmented" role="tablist" aria-label="Inventory views">
+          <button class="segment active" type="button" data-tab="home">Home</button>
+          <button class="segment" type="button" data-tab="fridge">Fridge</button>
           <button class="segment" type="button" data-tab="freezer">Freezer</button>
           <button class="segment" type="button" data-tab="pantry">Pantry</button>
           <button class="segment" type="button" data-tab="photos">Photos</button>
@@ -63,7 +63,7 @@
           <div class="section-heading">
             <div>
               <p class="eyebrow" id="zoneKicker">Current zone</p>
-              <h2 id="zoneTitle">Fridge</h2>
+              <h2 id="zoneTitle">Home</h2>
             </div>
             <p id="zoneSummary"></p>
           </div>

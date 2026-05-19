@@ -24,8 +24,8 @@ const appSource = readFileSync(appPath, "utf8");
 const htmlSource = readFileSync(join(root, "virtual-fridge/index.html"), "utf8");
 const rootHtmlSource = readFileSync(join(root, "index.html"), "utf8");
 
-for (const tab of ["fridge", "freezer", "pantry", "photos"]) {
-  if (!appSource.includes(`${tab}:`) && tab !== "photos") {
+for (const tab of ["home", "fridge", "freezer", "pantry", "photos"]) {
+  if (!appSource.includes(`${tab}:`) && !["home", "photos"].includes(tab)) {
     failures.push(`Missing zone data for tab: ${tab}`);
   }
 
@@ -41,13 +41,13 @@ if (!rootHtmlSource.includes("virtual-fridge/")) {
 const visualContractChecks = [
   ["visual item classifier", "function itemKind"],
   ["visual shelf section classifier", "function sectionKind"],
-  ["appliance frame renderer", "appliance-frame"],
+  ["smart fridge home renderer", "function renderHome"],
+  ["quick action tile renderer", "function renderHubTile"],
+  ["storage zone overview renderer", "function renderZoneOverview"],
   ["item kind dataset", "chip.dataset.kind"],
-  ["visual shelf class", "visual-shelf"],
-  ["pantry scene renderer", "pantry-scene"],
-  ["counter surface renderer", "counter-surface"],
-  ["kitchen location map renderer", "function renderKitchenMap"],
-  ["kitchen location model", "function kitchenLocations"],
+  ["item status dataset", "chip.dataset.status"],
+  ["food list zone renderer", "function renderZone"],
+  ["photo strip renderer", "function renderPhotoStrip"],
   ["direct zone query support", "URLSearchParams"]
 ];
 
@@ -58,17 +58,22 @@ for (const [label, token] of visualContractChecks) {
 }
 
 const requiredStyleTokens = [
-  ".appliance-cabinet",
-  ".visual-shelf",
+  ".hub-grid",
+  ".hub-tile",
+  ".tile-icon",
+  ".zone-card-grid",
+  ".zone-card",
+  ".view-actions",
+  ".food-section-grid",
+  ".food-card",
   ".item-mark",
-  ".pantry-cupboard",
-  ".counter-surface",
-  ".kitchen-map",
-  ".location-card",
-  ".location-graphic",
+  ".photo-strip",
+  ".segment",
   "[data-kind=\"produce\"]",
   "[data-kind=\"bottle\"]",
-  "[data-kind=\"frozen\"]"
+  "[data-kind=\"frozen\"]",
+  "[data-status=\"use-first\"]",
+  "[data-status=\"overstock\"]"
 ];
 
 const cssSource = readFileSync(join(root, "virtual-fridge/styles.css"), "utf8");
